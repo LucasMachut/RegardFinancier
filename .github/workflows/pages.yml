@@ -1,0 +1,69 @@
+name: Déployer sur GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deploiement.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # Une clé Supabase est un JWT dont la charge utile porte le rôle en clair.
+      # On décode celle qui part en ligne et on refuse tout ce qui n'est pas "anon".
+      # Chercher le mot "service_role" dans les fichiers ne marche pas : il apparaît
+      # légitimement dans les commentaires.
+      - name: La clé publiée doit être une clé anon
+        run: |
+          python3 - <<'PY'
+          import base64, json, re, sys, pathlib
+          f = pathlib.Path('js/config.js')
+          if not f.exists():
+              print('js/config.js absent, rien à vérifier.'); sys.exit(0)
+          m = re.search(r'SUPABASE_ANON\s*=\s*["\']([^"\']*)["\']', f.read_text(encoding='utf-8'))
+          tok = m.group(1) if m else ''
+          if not tok or tok.startswith('__'):
+              print('Clé non renseignée : le site se déploie en mode local.'); sys.exit(0)
+          parts = tok.split('.')
+          if len(parts) != 3:
+              print('::error::La valeur de SUPABASE_ANON n\'est pas un JWT.'); sys.exit(1)
+          pad = lambda x: x + '=' * (-len(x) % 4)
+          try:
+              charge = json.loads(base64.urlsafe_b64decode(pad(parts[1])))
+          except Exception as e:
+              print('::error::Clé illisible : %s' % e); sys.exit(1)
+          role = charge.get('role', '(absent)')
+          print('Rôle de la clé publiée :', role)
+          if role != 'anon':
+              print('::error::Rôle « %s » : cette clé contourne la RLS et ne doit jamais être publiée.' % role)
+              sys.exit(1)
+          PY
+
+      - name: Aucun fichier d'environnement ne doit être versionné
+        run: |
+          if git ls-files --error-unmatch .env >/dev/null 2>&1 || git ls-files '.env.*' | grep -q .; then
+            echo "::error::Un fichier .env est versionné. Retire-le avant de déployer."
+            exit 1
+          fi
+          echo "Aucun fichier .env versionné."
+
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
+      - id: deploiement
+        uses: actions/deploy-pages@v4

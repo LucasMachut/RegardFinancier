@@ -1,0 +1,12 @@
+.DS_Store
+node_modules/
+*.log
+# Ne jamais versionner de clé privée Supabase
+**/service_role*
+.env
+.env.*
+
+# Restes de l'installation, et doublon de index.html — à supprimer à la main
+_tmp/
+_repo.zip
+regardfinancier.html
