@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="fr">
+<html lang="pt-BR">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>Regard financier</title>
+<title>Olhar financeiro</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap">
@@ -281,15 +281,15 @@ svg .hit{fill:transparent}
 <header class="topbar">
   <div class="brand">
     <span class="mark">R$</span>
-    <div><b>Regard financier</b><small>moteur de prix et pilotage</small></div>
+    <div><b>Olhar financeiro</b><small>motor de preços e pilotagem</small></div>
   </div>
   <nav class="seg">
     <button id="nav-calc" aria-current="true" onclick="go('calc')">Calculadora</button>
-    <button id="nav-dash" aria-current="false" onclick="go('dash')">Tableau de bord</button>
+    <button id="nav-dash" aria-current="false" onclick="go('dash')">Painel</button>
   </nav>
   <div class="topright">
     <div class="ticker"><span>Pacote 02</span><b class="num" id="dock-v">—</b></div>
-    <button class="icobtn" onclick="cycleTheme()" title="Thème clair / sombre" aria-label="Changer le thème">
+    <button class="icobtn" onclick="cycleTheme()" title="Tema claro / escuro" aria-label="Mudar o tema">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.6v2M12 19.4v2M2.6 12h2M19.4 12h2M5.4 5.4l1.4 1.4M17.2 17.2l1.4 1.4M18.6 5.4l-1.4 1.4M6.8 17.2l-1.4 1.4"/></svg>
     </button>
   </div>
@@ -302,13 +302,13 @@ svg .hit{fill:transparent}
   <div class="pagehead">
     <div>
       <h1>Calculadora</h1>
-      <p class="lede">Ce que ce travail coûte en heures, et le prix qui en découle. Le Pacote 02 est celui que tu annonces.</p>
+      <p class="lede">O que este trabalho custa em horas, e o preço que sai daí. O Pacote 02 é o que você anuncia.</p>
     </div>
     <div class="tabs">
       <button class="tab" id="t-calc-main" aria-current="true" onclick="tab('calc','main')">Calculadora</button>
       <button class="tab" id="t-calc-set" aria-current="false" onclick="tab('calc','set')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
-        Paramètres
+        Parâmetros
       </button>
     </div>
   </div>
@@ -319,60 +319,60 @@ svg .hit{fill:transparent}
 
       <div class="stack">
         <div class="card pad">
-          <div class="cardhead"><h2>Le cadre</h2><span>ce que tu vas vraiment faire</span></div>
+          <div class="cardhead"><h2>O enquadramento</h2><span>o que você vai realmente fazer</span></div>
           <div class="grid2">
-            <div class="field wide"><label for="i-niche">Type de travail</label><select id="i-niche"></select></div>
-            <div class="field"><label for="i-local">Heures sur place<span class="sub">cobertura, sans le trajet</span></label><input type="number" id="i-local" step="0.5" min="0"></div>
-            <div class="field"><label for="i-custos">Coûts directs R$<span class="sub">transport, parking, location</span></label><input type="number" id="i-custos" step="10" min="0"></div>
+            <div class="field wide"><label for="i-niche">Tipo de trabalho</label><select id="i-niche"></select></div>
+            <div class="field"><label for="i-local">Horas no local<span class="sub">cobertura, sem o deslocamento</span></label><input type="number" id="i-local" step="0.5" min="0"></div>
+            <div class="field"><label for="i-custos">Custos diretos R$<span class="sub">transporte, estacionamento, locação</span></label><input type="number" id="i-custos" step="10" min="0"></div>
             <div class="field"><label for="i-prazo">Prazo</label><select id="i-prazo">
-              <option value="0">Standard</option><option value="r">Rápido</option><option value="u">Urgente</option></select></div>
-            <div class="field"><label for="i-seg">Segundo fotógrafo</label><select id="i-seg"><option value="0">Non</option><option value="1">Oui</option></select></div>
-            <div class="field wide"><label for="i-modelo">Modelo em cena<span class="sub">cachê repassé au prix coûtant, il entre dans les coûts directs</span></label><select id="i-modelo"></select></div>
+              <option value="0">Padrão</option><option value="r">Rápido</option><option value="u">Urgente</option></select></div>
+            <div class="field"><label for="i-seg">Segundo fotógrafo</label><select id="i-seg"><option value="0">Não</option><option value="1">Sim</option></select></div>
+            <div class="field wide"><label for="i-modelo">Modelo em cena<span class="sub">cachê repassado a preço de custo, entra nos custos diretos</span></label><select id="i-modelo"></select></div>
           </div>
         </div>
 
         <div class="card pad">
-          <div class="cardhead"><h2>Photo</h2><span>tri et édition</span></div>
+          <div class="cardhead"><h2>Foto</h2><span>seleção e edição</span></div>
           <div class="grid2">
-            <div class="field"><label for="i-trat">Fotos tratadas<span class="sub">le nombre réel que tu vas éditer</span></label><input type="number" id="i-trat" step="10" min="0"></div>
-            <div class="field"><label for="i-disp">Fotos disparadas<span class="sub">total de clics — c'est ça qui coûte le tri</span></label><input type="number" id="i-disp" step="50" min="0"></div>
+            <div class="field"><label for="i-trat">Fotos tratadas<span class="sub">o número real que você vai editar</span></label><input type="number" id="i-trat" step="10" min="0"></div>
+            <div class="field"><label for="i-disp">Fotos disparadas<span class="sub">total de cliques, é isso que custa a seleção</span></label><input type="number" id="i-disp" step="50" min="0"></div>
           </div>
         </div>
 
         <div class="card pad">
-          <div class="cardhead"><h2>Vídeo et áudio</h2><span>trois objets différents</span></div>
+          <div class="cardhead"><h2>Vídeo e áudio</h2><span>três objetos diferentes</span></div>
           <div class="grid2">
-            <div class="field"><label for="i-clip">Clipes tratados ≤20s<span class="sub">cor + estabilização, sans montage</span></label><input type="number" id="i-clip" step="1" min="0"></div>
+            <div class="field"><label for="i-clip">Clipes tratados ≤20s<span class="sub">cor e estabilização, sem montagem</span></label><input type="number" id="i-clip" step="1" min="0"></div>
             <div class="field"><label for="i-reels">Reels montados 30-45s<span class="sub">cortes, trilha, legendas</span></label><input type="number" id="i-reels" step="1" min="0"></div>
-            <div class="field"><label for="i-video">Vídeo principal / aftermovie<span class="sub">roteiro, som, 1 à 3 min</span></label><input type="number" id="i-video" step="1" min="0"></div>
-            <div class="field"><label for="i-pess">Pessoas entrevistadas<span class="sub">áudio : setup + montage par personne</span></label><input type="number" id="i-pess" step="1" min="0"></div>
+            <div class="field"><label for="i-video">Vídeo principal / aftermovie<span class="sub">roteiro, som, 1 a 3 min</span></label><input type="number" id="i-video" step="1" min="0"></div>
+            <div class="field"><label for="i-pess">Pessoas entrevistadas<span class="sub">áudio: setup e edição por pessoa</span></label><input type="number" id="i-pess" step="1" min="0"></div>
           </div>
         </div>
 
         <div class="card pad">
-          <div class="cardhead"><h2>La négociation</h2><span>si tu annonces autre chose que le calcul</span></div>
+          <div class="cardhead"><h2>A negociação</h2><span>se você anuncia outra coisa que não o cálculo</span></div>
           <div class="grid2">
-            <div class="field wide"><label for="i-cobrar">Valor à annoncer R$<span class="sub">0 = j'annonce le calcul</span></label><input type="number" id="i-cobrar" step="50" min="0"></div>
+            <div class="field wide"><label for="i-cobrar">Valor a anunciar R$<span class="sub">0 = anuncio o cálculo</span></label><input type="number" id="i-cobrar" step="50" min="0"></div>
           </div>
         </div>
       </div>
 
       <aside class="stack sticky" style="position:sticky; top:88px">
         <div class="hero">
-          <span class="eyebrow">Pacote 02 — le prix à annoncer</span>
+          <span class="eyebrow">Pacote 02, o preço a anunciar</span>
           <span class="big num" id="r-valor">—</span>
           <span class="cap" id="r-sub"></span>
           <div class="rates">
-            <div class="rate"><span>1h pour toi</span><b class="num" id="r-h-custo">—</b><small id="r-h-custo-s"></small></div>
-            <div class="rate"><span>1h vendue</span><b class="num" id="r-h-venda">—</b><small>rémunération ÷ (1 − marge)</small></div>
-            <div class="rate"><span>Total heures</span><b class="num" id="r-horas">—</b><small id="r-horas-s"></small></div>
+            <div class="rate"><span>1h para você</span><b class="num" id="r-h-custo">—</b><small id="r-h-custo-s"></small></div>
+            <div class="rate"><span>1h vendida</span><b class="num" id="r-h-venda">—</b><small>remuneração ÷ (1 − margem)</small></div>
+            <div class="rate"><span>Total de horas</span><b class="num" id="r-horas">—</b><small id="r-horas-s"></small></div>
           </div>
         </div>
         <div class="stack-s" id="r-alerts"></div>
         <div class="card pad">
           <div class="row">
-            <button class="btn" onclick="addMission()">Ajouter au tableau de bord</button>
-            <button class="btn ghost" onclick="go('dash')">Voir le mois</button>
+            <button class="btn" onclick="addMission()">Adicionar ao painel</button>
+            <button class="btn ghost" onclick="go('dash')">Ver o mês</button>
           </div>
           <p class="note" style="margin-top:10px" id="r-saved-wrap"><span class="saved" id="r-saved"></span></p>
         </div>
@@ -381,23 +381,23 @@ svg .hit{fill:transparent}
 
     <div class="stack" style="margin-top:20px">
       <div class="card pad">
-        <div class="cardhead"><h2>D'où vient le chiffre</h2><span>chaque ligne, en heures et en reais</span></div>
+        <div class="cardhead"><h2>De onde vem o número</h2><span>cada linha, em horas e em reais</span></div>
         <div class="tw"><table id="r-decomp"></table></div>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Où va l'argent</h2><span>le prix, découpé</span></div>
+        <div class="cardhead"><h2>Para onde vai o dinheiro</h2><span>o preço, repartido</span></div>
         <div class="tw"><table id="r-reparti"></table></div>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Les trois pacotes</h2><span>le 03 existe pour que le 02 paraisse raisonnable</span></div>
+        <div class="cardhead"><h2>Os três pacotes</h2><span>o 03 existe para que o 02 pareça razoável</span></div>
         <div class="pacotes" id="r-pacotes"></div>
         <div class="stack-s" style="margin-top:18px" id="r-regras"></div>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Extras vendables</h2><span>prix de vente, coût réel, multiple</span></div>
+        <div class="cardhead"><h2>Extras vendáveis</h2><span>preço de venda, custo real, múltiplo</span></div>
         <div class="tw"><table id="r-extras"></table></div>
       </div>
     </div>
@@ -407,23 +407,23 @@ svg .hit{fill:transparent}
   <div id="pane-calc-set" hidden>
     <div class="stack">
       <div class="card pad">
-        <div class="cardhead"><h2>Le socle</h2><span>tout le reste en découle</span></div>
+        <div class="cardhead"><h2>A base</h2><span>todo o resto decorre daqui</span></div>
         <div class="grid3">
-          <div class="field"><label for="p-sal">Salaire mensuel visé R$<span class="sub">pró-labore</span></label><input type="number" id="p-sal" step="500"></div>
-          <div class="field"><label for="p-dias">Jours facturables par semaine<span class="sub">vendus à un client, pas ton rythme de travail</span></label><input type="number" id="p-dias" step="1"></div>
-          <div class="field"><label for="p-hrs">Heures par jour</label><input type="number" id="p-hrs" step="1"></div>
-          <div class="field"><label for="p-auto">Taux horaire<span class="sub">calculé depuis le salaire, ou fixé à la main</span></label><select id="p-auto"><option value="1">Calculé automatiquement</option><option value="0">Je le fixe</option></select></div>
-          <div class="field"><label for="p-taxa">Taux horaire R$/h</label><input type="number" id="p-taxa" step="1"></div>
-          <div class="field"><label for="p-marge">Marge<span class="sub">0,5 = 50 %. Figée : pour baisser, on livre moins</span></label><input type="number" id="p-marge" step="0.05" min="0" max="0.9"></div>
-          <div class="field"><label for="p-pisoh">Plancher horaire R$/h<span class="sub">contrôlé hors coûts directs. Ton seuil réel : 140</span></label><input type="number" id="p-pisoh" step="10"></div>
-          <div class="field"><label for="p-g01">Écart 01 → 02<span class="sub">en %. Vise 25 à 40</span></label><input type="number" id="p-g01" step="1" min="0"></div>
-          <div class="field"><label for="p-g03">Écart 02 → 03<span class="sub">en %. Vise 40 à 80</span></label><input type="number" id="p-g03" step="1" min="0"></div>
+          <div class="field"><label for="p-sal">Salário mensal pretendido R$<span class="sub">pró-labore</span></label><input type="number" id="p-sal" step="500"></div>
+          <div class="field"><label for="p-dias">Dias faturáveis por semana<span class="sub">vendidos a um cliente, não o seu ritmo de trabalho</span></label><input type="number" id="p-dias" step="1"></div>
+          <div class="field"><label for="p-hrs">Horas por dia</label><input type="number" id="p-hrs" step="1"></div>
+          <div class="field"><label for="p-auto">Valor da hora<span class="sub">calculado a partir do salário, ou fixado na mão</span></label><select id="p-auto"><option value="1">Calculado automaticamente</option><option value="0">Eu defino</option></select></div>
+          <div class="field"><label for="p-taxa">Valor da hora R$/h</label><input type="number" id="p-taxa" step="1"></div>
+          <div class="field"><label for="p-marge">Margem<span class="sub">0,5 = 50 %. Fixa: para baixar, entrega-se menos</span></label><input type="number" id="p-marge" step="0.05" min="0" max="0.9"></div>
+          <div class="field"><label for="p-pisoh">Piso por hora R$/h<span class="sub">controlado fora dos custos diretos. Seu limite real: 140</span></label><input type="number" id="p-pisoh" step="10"></div>
+          <div class="field"><label for="p-g01">Diferença 01 → 02<span class="sub">em %. Mire 25 a 40</span></label><input type="number" id="p-g01" step="1" min="0"></div>
+          <div class="field"><label for="p-g03">Diferença 02 → 03<span class="sub">em %. Mire 40 a 80</span></label><input type="number" id="p-g03" step="1" min="0"></div>
         </div>
         <p class="formula" id="p-formula"></p>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Prazos et express</h2><span>l'urgence se vend en % du pacote</span></div>
+        <div class="cardhead"><h2>Prazos e express</h2><span>a urgência se vende em % do pacote</span></div>
         <div class="grid3">
           <div class="field"><label for="p-rap">Rápido<span class="sub">0,25 = +25 %</span></label><input type="number" id="p-rap" step="0.05"></div>
           <div class="field"><label for="p-urg">Urgente<span class="sub">0,40 = +40 %</span></label><input type="number" id="p-urg" step="0.05"></div>
@@ -431,36 +431,36 @@ svg .hit{fill:transparent}
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Les niches</h2><span>ce que chaque type de travail coûte en temps</span>
-          <button class="btn ghost sm right" onclick="addNiche()">+ Ajouter une niche</button></div>
+        <div class="cardhead"><h2>Os nichos</h2><span>o que cada tipo de trabalho custa em tempo</span>
+          <button class="btn ghost sm right" onclick="addNiche()">+ Adicionar um nicho</button></div>
         <div id="p-niches"></div>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Vídeo et áudio</h2><span>en minutes de travail réel</span></div>
+        <div class="cardhead"><h2>Vídeo e áudio</h2><span>em minutos de trabalho real</span></div>
         <div class="grid3" id="p-modules"></div>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Modelo em cena</h2><span>cachê repassé au prix coûtant, sans marge</span></div>
+        <div class="cardhead"><h2>Modelo em cena</h2><span>cachê repassado a preço de custo, sem margem</span></div>
         <div id="p-modelo"></div>
-        <p class="note" style="margin-top:12px">Ces montants ne sont pas ta rémunération. Ils entrent dans les coûts directs, comme le segundo fotógrafo, et se retrouvent tels quels dans le prix annoncé. Les heures d’un palier comptent la préparation, les changements de tenue et l’attente, pas seulement le temps devant l’objectif. Le palier uso ampliado couvre site, Booking, anúncios pagos et impressos pendant douze mois : il se négocie avant le tournage.</p>
+        <p class="note" style="margin-top:12px">Estes valores não são a sua remuneração. Entram nos custos diretos, como o segundo fotógrafo, e reaparecem iguais no preço anunciado. As horas de uma faixa contam a preparação, as trocas de roupa e a espera, não só o tempo diante da câmera. A faixa uso ampliado cobre site, Booking, anúncios pagos e impressos por doze meses, e se negocia antes da captação.</p>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Les extras</h2><span>prix libre — le coût est calculé en face</span>
-          <button class="btn ghost sm right" onclick="addExtra()">+ Ajouter un extra</button></div>
+        <div class="cardhead"><h2>Os extras</h2><span>preço livre, o custo é calculado ao lado</span>
+          <button class="btn ghost sm right" onclick="addExtra()">+ Adicionar um extra</button></div>
         <div class="tw editable"><table id="p-extras"></table></div>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Sauvegarde</h2><span>tes réglages vivent dans ce navigateur</span></div>
+        <div class="cardhead"><h2>Backup</h2><span>seus ajustes vivem neste navegador</span></div>
         <textarea id="p-json" spellcheck="false"></textarea>
         <div class="row" style="margin-top:12px">
-          <button class="btn" onclick="save()">Enregistrer</button>
-          <button class="btn ghost" onclick="exportJSON()">Copier le JSON</button>
-          <button class="btn ghost" onclick="importJSON()">Importer ce JSON</button>
-          <button class="btn danger" onclick="resetAll()">Valeurs d'origine</button>
+          <button class="btn" onclick="save()">Salvar</button>
+          <button class="btn ghost" onclick="exportJSON()">Copiar o JSON</button>
+          <button class="btn ghost" onclick="importJSON()">Importar este JSON</button>
+          <button class="btn danger" onclick="resetAll()">Valores de origem</button>
           <span class="saved" id="p-saved"></span>
         </div>
       </div>
@@ -472,14 +472,14 @@ svg .hit{fill:transparent}
 <section class="page" id="page-dash" hidden>
   <div class="pagehead">
     <div>
-      <h1>Tableau de bord</h1>
-      <p class="lede">Ce que tu as facturé, ce qui est rentré, ce qu'il reste à faire pour tenir le mois.</p>
+      <h1>Painel</h1>
+      <p class="lede">O que você faturou, o que entrou, e o que falta para fechar o mês.</p>
     </div>
     <div class="tabs">
-      <button class="tab" id="t-dash-main" aria-current="true" onclick="tab('dash','main')">Tableau de bord</button>
+      <button class="tab" id="t-dash-main" aria-current="true" onclick="tab('dash','main')">Painel</button>
       <button class="tab" id="t-dash-set" aria-current="false" onclick="tab('dash','set')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
-        Paramètres
+        Parâmetros
       </button>
     </div>
   </div>
@@ -488,30 +488,30 @@ svg .hit{fill:transparent}
   <div id="pane-dash-main">
     <div class="stack">
       <div class="card pad">
-        <div class="cardhead"><h2>Le mois</h2><span id="d-hint"></span>
-          <div class="right" style="min-width:210px"><select id="d-mois" aria-label="Mois affiché"></select></div>
+        <div class="cardhead"><h2>O mês</h2><span id="d-hint"></span>
+          <div class="right" style="min-width:210px"><select id="d-mois" aria-label="Mês exibido"></select></div>
         </div>
         <div class="tiles" id="d-tiles"></div>
         <div class="meter" id="d-meter"></div>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2 id="d-titre-chart">Les douze derniers mois</h2><span>facturé par mois · trait pointillé = l'objectif</span></div>
+        <div class="cardhead"><h2 id="d-titre-chart">Os últimos doze meses</h2><span>faturado por mês · linha pontilhada = a meta</span></div>
         <div class="chartwrap" id="d-chartwrap">
-          <svg id="d-chart" viewBox="0 0 720 210" role="img" aria-label="Chiffre d'affaires facturé mois par mois, comparé à l'objectif mensuel"></svg>
+          <svg id="d-chart" viewBox="0 0 720 210" role="img" aria-label="Faturamento mês a mês, comparado à meta mensal"></svg>
           <div class="tip" id="d-tip"></div>
         </div>
         <div class="tw" style="margin-top:18px"><table id="d-table"></table></div>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Par type de travail</h2><span id="d-niches-hint"></span></div>
+        <div class="cardhead"><h2>Por tipo de trabalho</h2><span id="d-niches-hint"></span></div>
         <div class="barlist" id="d-niches"></div>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Les missions</h2><span>tout est modifiable</span>
-          <button class="btn ghost sm right" onclick="addMissionVide()">+ Nouvelle mission</button></div>
+        <div class="cardhead"><h2>Os trabalhos</h2><span>tudo é editável</span>
+          <button class="btn ghost sm right" onclick="addMissionVide()">+ Novo trabalho</button></div>
         <div class="tw editable"><table id="d-missions"></table></div>
       </div>
     </div>
@@ -521,35 +521,35 @@ svg .hit{fill:transparent}
   <div id="pane-dash-set" hidden>
     <div class="stack">
       <div class="card pad">
-        <div class="cardhead"><h2>Objectifs du mois</h2><span>ce que le tableau de bord compare</span></div>
+        <div class="cardhead"><h2>Metas do mês</h2><span>o que o painel compara</span></div>
         <div class="grid3">
-          <div class="field"><label for="q-obj">Objectif mensuel R$<span class="sub">ce que tu vises chaque mois</span></label><input type="number" id="q-obj" step="500"></div>
-          <div class="field"><label for="q-desp">Dépenses fixes par mois R$<span class="sub">salaire compris</span></label><input type="number" id="q-desp" step="100"></div>
-          <div class="field"><label for="q-per">Période affichée<span class="sub">nombre de mois sur le graphique</span></label>
-            <select id="q-per"><option value="6">6 mois</option><option value="12">12 mois</option><option value="18">18 mois</option><option value="24">24 mois</option></select></div>
+          <div class="field"><label for="q-obj">Meta mensal R$<span class="sub">o que você mira todo mês</span></label><input type="number" id="q-obj" step="500"></div>
+          <div class="field"><label for="q-desp">Despesas fixas por mês R$<span class="sub">salário incluído</span></label><input type="number" id="q-desp" step="100"></div>
+          <div class="field"><label for="q-per">Período exibido<span class="sub">número de meses no gráfico</span></label>
+            <select id="q-per"><option value="6">6 meses</option><option value="12">12 meses</option><option value="18">18 meses</option><option value="24">24 meses</option></select></div>
         </div>
         <p class="formula" id="q-formula"></p>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Ce qui compte comme facturé</h2><span>les trois statuts d'une mission</span></div>
+        <div class="cardhead"><h2>O que conta como faturado</h2><span>os três status de um trabalho</span></div>
         <div class="stack-s">
-          <div class="al av"><span class="k">Proposé</span><span>Devis envoyé, rien de signé. <strong>Compté à part</strong>, en pipeline — jamais dans le facturé.</span></div>
-          <div class="al ok"><span class="k">Facturé</span><span>Mission signée ou livrée. <strong>Compte dans le facturé</strong> et dans les heures du mois.</span></div>
-          <div class="al ok"><span class="k">Payé</span><span>L'argent est arrivé. Compte dans le facturé <strong>et</strong> dans l'encaissé.</span></div>
+          <div class="al av"><span class="k">Proposto</span><span>Orçamento enviado, nada fechado. <strong>Contado à parte</strong>, no pipeline, nunca no faturado.</span></div>
+          <div class="al ok"><span class="k">Fechado</span><span>Trabalho fechado ou entregue. <strong>Conta no faturado</strong> e nas horas do mês.</span></div>
+          <div class="al ok"><span class="k">Pago</span><span>O dinheiro entrou. Conta no faturado <strong>e</strong> no recebido.</span></div>
         </div>
       </div>
 
       <div class="card pad">
-        <div class="cardhead"><h2>Les données</h2><span>les missions vivent dans ce navigateur</span></div>
+        <div class="cardhead"><h2>Os dados</h2><span>os trabalhos vivem neste navegador</span></div>
         <div class="row">
-          <button class="btn" onclick="addMissionVide()">+ Nouvelle mission</button>
-          <button class="btn ghost" onclick="exportCSV()">Exporter les missions en CSV</button>
-          <button class="btn ghost" onclick="tab('calc','set');go('calc')">Sauvegarde JSON complète</button>
-          <button class="btn danger" onclick="clearMissions()">Vider les missions</button>
+          <button class="btn" onclick="addMissionVide()">+ Novo trabalho</button>
+          <button class="btn ghost" onclick="exportCSV()">Exportar os trabalhos em CSV</button>
+          <button class="btn ghost" onclick="tab('calc','set');go('calc')">Backup JSON completo</button>
+          <button class="btn danger" onclick="clearMissions()">Limpar os trabalhos</button>
           <span class="saved" id="q-saved"></span>
         </div>
-        <p class="note" style="margin-top:12px">Le CSV s'ouvre dans un tableur. La sauvegarde JSON, dans les paramètres de la calculadora, contient tout : socle, niches, extras et missions.</p>
+        <p class="note" style="margin-top:12px">O CSV abre em uma planilha. O backup JSON, nos parâmetros da calculadora, contém tudo: base, nichos, extras e trabalhos.</p>
       </div>
     </div>
   </div>
@@ -568,9 +568,9 @@ var DEFAULTS={
     {k:"clipe",n:"Clipe tratado ≤20s",min:20},
     {k:"reels",n:"Reels montado 30-45s",min:180},
     {k:"video",n:"Vídeo principal / aftermovie",min:360},
-    {k:"audioSetup",n:"Áudio — setup sur place",min:20},
-    {k:"audioLocal",n:"Áudio — par personne, sur place",min:10},
-    {k:"audioEdicao",n:"Áudio — par personne, au montage",min:60}
+    {k:"audioSetup",n:"Áudio, setup no local",min:20},
+    {k:"audioLocal",n:"Áudio, por pessoa, no local",min:10},
+    {k:"audioEdicao",n:"Áudio, por pessoa, na edição",min:60}
   ],
   modelo:[
     {n:"Cachê mínimo, até 2h",          preco:325,  horas:2, uso:"redes sociais do cliente",                            curto:"modelo em cena, até 2h"},
@@ -578,11 +578,11 @@ var DEFAULTS={
     {n:"Diária até 6h, uso ampliado",    preco:1600, horas:6, uso:"site, Booking, anúncios pagos e impressos, 12 meses", curto:"modelo em cena, diária e uso ampliado 12 meses"}
   ],
   niches:[
-    {n:"Imóveis",              ov:2.0, mf:3,   mt:.15, prazo:"5 jours ouvrés",     piso:1000, mmin:600, mmax:1400},
-    {n:"Evento corporativo",   ov:2.5, mf:2,   mt:.15, prazo:"7 jours",            piso:1200, mmin:1200,mmax:2200},
-    {n:"Ensaio",               ov:2.0, mf:2.5, mt:.15, prazo:"15 jours",           piso:0,    mmin:0,   mmax:0},
-    {n:"Casamento",            ov:4.0, mf:2,   mt:.15, prazo:"30 jours",           piso:0,    mmin:0,   mmax:0},
-    {n:"Festival / multi-dias",ov:3.0, mf:1.5, mt:.10, prazo:"15 j · reels à J+1", piso:0,    mmin:0,   mmax:0}
+    {n:"Imóveis",              ov:2.0, mf:3,   mt:.15, prazo:"5 dias úteis",     piso:1000, mmin:600, mmax:1400},
+    {n:"Evento corporativo",   ov:2.5, mf:2,   mt:.15, prazo:"7 dias",            piso:1200, mmin:1200,mmax:2200},
+    {n:"Ensaio",               ov:2.0, mf:2.5, mt:.15, prazo:"15 dias",           piso:0,    mmin:0,   mmax:0},
+    {n:"Casamento",            ov:4.0, mf:2,   mt:.15, prazo:"30 dias",           piso:0,    mmin:0,   mmax:0},
+    {n:"Festival / multi-dias",ov:3.0, mf:1.5, mt:.10, prazo:"15 dias · reels em D+1", piso:0,    mmin:0,   mmax:0}
   ],
   extras:[
     {n:"Foto extra tratada",          preco:35,   min:2,   rep:0},
@@ -599,8 +599,8 @@ var DEFAULTS={
     {n:"Modelo, acréscimo uso ampliado 12 meses", preco:800, min:0, rep:1}
   ],
   missions:[
-    {d:"2026-08-27",cli:"Ãmba — inauguração",niche:"Evento corporativo",valor:900, horas:9.54,st:"pago"},
-    {d:"2026-08-31",cli:"Imobiliária — Arpoador",niche:"Imóveis",       valor:1000,horas:6.55,st:"fechado"}
+    {d:"2026-08-27",cli:"Ãmba, inauguração",niche:"Evento corporativo",valor:900, horas:9.54,st:"pago"},
+    {d:"2026-08-31",cli:"Imobiliária, Arpoador",niche:"Imóveis",       valor:1000,horas:6.55,st:"fechado"}
   ],
   entrada:{niche:1,local:3,trat:50,disp:350,clip:6,reels:0,video:0,pess:0,seg:0,modelo:"",prazo:"0",custos:80,cobrar:0},
   dash:{periode:12},
@@ -640,6 +640,18 @@ function migre(st){
     if(st.entrada&&st.entrada.modelo==null)st.entrada.modelo="";
     s.rev=3; st.__migre=1;
   }
+  /* Passage du site en portugais : on renomme les libelles encore en francais. */
+  if(!(s.rev>=4)){
+    var PRZ={"5 jours ouvrés":"5 dias úteis","7 jours":"7 dias","15 jours":"15 dias",
+             "30 jours":"30 dias","15 j · reels à J+1":"15 dias · reels em D+1"};
+    var LN=st.niches||[];
+    for(var a=0;a<LN.length;a++)if(PRZ[LN[a].prazo])LN[a].prazo=PRZ[LN[a].prazo];
+    var MODN={audioSetup:"Áudio, setup no local",audioLocal:"Áudio, por pessoa, no local",
+              audioEdicao:"Áudio, por pessoa, na edição"};
+    var LM=st.modules||[];
+    for(var b=0;b<LM.length;b++)if(MODN[LM[b].k]&&/ — |par personne|sur place|au montage/.test(LM[b].n||""))LM[b].n=MODN[LM[b].k];
+    s.rev=4; st.__migre=1;
+  }
   return st;
 }
 function clone(o){return JSON.parse(JSON.stringify(o));}
@@ -654,8 +666,8 @@ function merge(base,inc){
   return base;
 }
 function save(){
-  try{localStorage.setItem(KEY,JSON.stringify(S)); flash("p-saved","Enregistré");}
-  catch(e){flash("p-saved","Impossible d'enregistrer ici — copie le JSON","er");}
+  try{localStorage.setItem(KEY,JSON.stringify(S)); flash("p-saved","Salvo");}
+  catch(e){flash("p-saved","Não deu para salvar aqui. Copie o JSON.","er");}
   syncJSON();
 }
 function flash(id,t,kind){
@@ -669,7 +681,7 @@ var BRL2=new Intl.NumberFormat("pt-BR",{style:"currency",currency:"BRL",minimumF
 function m(v){return BRL.format(Math.round(v||0));}
 function m2(v){return BRL2.format(v||0);}
 function h(v){var t=Math.round((v||0)*60); return Math.floor(t/60)+"h"+String(t%60).padStart(2,"0");}
-function nf(v,d){return (v||0).toLocaleString("fr-FR",{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
+function nf(v,d){return (v||0).toLocaleString("pt-BR",{minimumFractionDigits:d||0,maximumFractionDigits:d||0});}
 function esc(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c];});}
 function num(id){var e=document.getElementById(id); return e?(parseFloat(e.value)||0):0;}
 function set(id,v){var e=document.getElementById(id); if(e&&document.activeElement!==e)e.value=v;}
@@ -730,14 +742,14 @@ function modeloSel(){
 function calcule(){
   var e=S.entrada, N=S.niches[Math.min(e.niche,S.niches.length-1)]||S.niches[0];
   var linhas=[
-    {n:"Heures sur place",q:e.local,u:"—",hrs:e.local},
-    {n:"Heures fixes",s:"trajet, prépa, import, tri final, livraison",q:1,u:nf(N.ov,1)+" h",hrs:N.ov},
-    {n:"Tri des photos",q:e.disp,u:nf(N.mt,2)+" min/foto",hrs:e.disp*N.mt/60},
-    {n:"Édition des photos",q:e.trat,u:nf(N.mf,1)+" min/foto",hrs:e.trat*N.mf/60},
+    {n:"Horas no local",q:e.local,u:"—",hrs:e.local},
+    {n:"Horas fixas",s:"deslocamento, preparação, importação, seleção final, entrega",q:1,u:nf(N.ov,1)+" h",hrs:N.ov},
+    {n:"Seleção das fotos",q:e.disp,u:nf(N.mt,2)+" min/foto",hrs:e.disp*N.mt/60},
+    {n:"Edição das fotos",q:e.trat,u:nf(N.mf,1)+" min/foto",hrs:e.trat*N.mf/60},
     {n:"Clipes tratados",q:e.clip,u:mod("clipe")+" min",hrs:e.clip*mod("clipe")/60},
     {n:"Reels montados",q:e.reels,u:mod("reels")+" min",hrs:e.reels*mod("reels")/60},
     {n:"Vídeo principal",q:e.video,u:mod("video")+" min",hrs:e.video*mod("video")/60},
-    {n:"Áudio",q:e.pess,u:(mod("audioLocal")+mod("audioEdicao"))+" min/pers.",
+    {n:"Áudio",q:e.pess,u:(mod("audioLocal")+mod("audioEdicao"))+" min/pessoa",
       hrs:e.pess?(mod("audioSetup")+e.pess*(mod("audioLocal")+mod("audioEdicao")))/60:0}
   ];
   var horas=0; for(var i=0;i<linhas.length;i++)horas+=linhas[i].hrs;
@@ -764,41 +776,41 @@ function renderCalc(){
   document.getElementById("r-valor").textContent=m(c.v02);
   var dk=document.getElementById("dock-v"); if(dk)dk.textContent=m(c.v02);
   document.getElementById("r-sub").textContent = c.mult>1
-    ? "prazo "+(e.prazo==="r"?"rápido":"urgente")+" inclus (×"+nf(c.mult,2)+") · standard : "+c.N.prazo
-    : "prazo standard : "+c.N.prazo;
+    ? "prazo "+(e.prazo==="r"?"rápido":"urgente")+" incluído (×"+nf(c.mult,2)+") · padrão: "+c.N.prazo
+    : "prazo padrão: "+c.N.prazo;
   document.getElementById("r-h-custo").textContent=m2(taxa());
   document.getElementById("r-h-custo-s").textContent=S.socle.auto
-    ? nf(S.socle.salario)+" ÷ ("+S.socle.dias+"×4×"+S.socle.horas+"h)":"fixé à la main";
+    ? nf(S.socle.salario)+" ÷ ("+S.socle.dias+"×4×"+S.socle.horas+"h)":"fixado na mão";
   document.getElementById("r-h-venda").textContent=m2(c.hv);
   document.getElementById("r-horas").textContent=h(c.horas);
-  document.getElementById("r-horas-s").textContent=nf(c.horas,2)+" h de travail réel";
+  document.getElementById("r-horas-s").textContent=nf(c.horas,2)+" h de trabalho real";
 
-  var t='<thead><tr><th>Poste</th><th class="n">Qté</th><th class="n">Unité</th><th class="n">Heures</th><th class="n">R$</th></tr></thead><tbody>';
+  var t='<thead><tr><th>Item</th><th class="n">Qtd</th><th class="n">Unidade</th><th class="n">Horas</th><th class="n">R$</th></tr></thead><tbody>';
   for(var i=0;i<c.linhas.length;i++){var L=c.linhas[i];
     t+='<tr'+(L.hrs?'':' class="z"')+'><td>'+esc(L.n)+(L.s?'<span class="sub">'+esc(L.s)+'</span>':'')+
        '</td><td class="n">'+nf(L.q,L.q%1?1:0)+'</td><td class="n">'+esc(L.u)+
        '</td><td class="n">'+h(L.hrs)+'</td><td class="n">'+m(L.hrs*c.hv)+'</td></tr>';}
-  t+='<tr class="sum"><td>Total des heures</td><td class="n"></td><td class="n"></td><td class="n">'+h(c.horas)+
+  t+='<tr class="sum"><td>Total de horas</td><td class="n"></td><td class="n"></td><td class="n">'+h(c.horas)+
      '</td><td class="n">'+m(c.vTrabalho)+'</td></tr>';
   var dd=[];
-  if(e.custos)dd.push("frais "+m(e.custos));
+  if(e.custos)dd.push("despesas "+m(e.custos));
   if(e.seg&&c.segundo)dd.push("segundo fotógrafo "+m(c.segundo));
   if(c.modeloVal)dd.push("modelo "+m(c.modeloVal));
-  var dsub=dd.length>1?dd.join(" · "):"sans marge, tu les avances";
-  t+='<tr><td>Coûts directs<span class="sub">'+esc(dsub)+'</span></td><td class="n"></td><td class="n"></td><td class="n">—</td><td class="n">'+m(c.diretos)+'</td></tr>';
-  if(c.mult>1)t+='<tr><td>Multiplicateur de prazo</td><td class="n"></td><td class="n"></td><td class="n">—</td><td class="n">×'+nf(c.mult,2)+'</td></tr>';
+  var dsub=dd.length>1?dd.join(" · "):"sem margem, você adianta";
+  t+='<tr><td>Custos diretos<span class="sub">'+esc(dsub)+'</span></td><td class="n"></td><td class="n"></td><td class="n">—</td><td class="n">'+m(c.diretos)+'</td></tr>';
+  if(c.mult>1)t+='<tr><td>Multiplicador de prazo</td><td class="n"></td><td class="n"></td><td class="n">—</td><td class="n">×'+nf(c.mult,2)+'</td></tr>';
   t+='<tr class="total"><td>Pacote 02</td><td class="n"></td><td class="n"></td><td class="n"></td><td class="n">'+m(c.v02)+'</td></tr></tbody>';
   document.getElementById("r-decomp").innerHTML=t;
 
   var cob=c.cobrado, pct=function(v){return cob?nf(100*v/cob,0)+" %":"—";};
-  var r='<thead><tr><th>Sur '+esc(m(cob))+(e.cobrar>0?" annoncés":" calculés")+'</th><th class="n">R$</th><th class="n">Part</th></tr></thead><tbody>';
-  r+='<tr><td>Coûts directs que tu avances</td><td class="n">'+m(c.diretos)+'</td><td class="n">'+pct(c.diretos)+'</td></tr>';
-  r+='<tr><td>Ta rémunération</td><td class="n">'+m(c.remun)+'</td><td class="n">'+pct(c.remun)+'</td></tr>';
-  r+='<tr><td>Structure et marge<span class="sub">prospection, admin, matériel, creux, impôts</span></td><td class="n">'+m(c.estrutura)+'</td><td class="n">'+pct(c.estrutura)+'</td></tr>';
-  r+='<tr class="sum"><td>Ton heure réelle sur ce travail</td><td class="n">'+m2(c.horaReal)+'</td><td class="n">cible '+m2(taxa())+'</td></tr>';
-  r+='<tr class="sum"><td>Ton heure hors coûts directs<span class="sub">c\'est elle que le plancher contrôle</span></td><td class="n">'+m2(c.horaLiquida)+'</td><td class="n">plancher '+m(S.socle.pisoHora)+'</td></tr>';
-  r+='<tr><td>À l\'heure, coûts directs inclus<span class="sub">indicatif, ne sert pas de contrôle</span></td><td class="n">'+m2(c.horaBruta)+'</td><td class="n">—</td></tr>';
-  r+='<tr><td>Missions/mois pour couvrir '+esc(m(S.socle.despesas))+'</td><td class="n">'+(cob?nf(S.socle.despesas/cob,1):"—")+'</td><td class="n"></td></tr></tbody>';
+  var r='<thead><tr><th>Sobre '+esc(m(cob))+(e.cobrar>0?" anunciados":" calculados")+'</th><th class="n">R$</th><th class="n">Parte</th></tr></thead><tbody>';
+  r+='<tr><td>Custos diretos que você adianta</td><td class="n">'+m(c.diretos)+'</td><td class="n">'+pct(c.diretos)+'</td></tr>';
+  r+='<tr><td>Sua remuneração</td><td class="n">'+m(c.remun)+'</td><td class="n">'+pct(c.remun)+'</td></tr>';
+  r+='<tr><td>Estrutura e margem<span class="sub">prospecção, administrativo, equipamento, meses fracos, impostos</span></td><td class="n">'+m(c.estrutura)+'</td><td class="n">'+pct(c.estrutura)+'</td></tr>';
+  r+='<tr class="sum"><td>Sua hora real neste trabalho</td><td class="n">'+m2(c.horaReal)+'</td><td class="n">alvo '+m2(taxa())+'</td></tr>';
+  r+='<tr class="sum"><td>Sua hora fora dos custos diretos<span class="sub">é ela que o piso controla</span></td><td class="n">'+m2(c.horaLiquida)+'</td><td class="n">piso '+m(S.socle.pisoHora)+'</td></tr>';
+  r+='<tr><td>Por hora, custos diretos incluídos<span class="sub">indicativo, não serve de controle</span></td><td class="n">'+m2(c.horaBruta)+'</td><td class="n">—</td></tr>';
+  r+='<tr><td>Trabalhos/mês para cobrir '+esc(m(S.socle.despesas))+'</td><td class="n">'+(cob?nf(S.socle.despesas/cob,1):"—")+'</td><td class="n"></td></tr></tbody>';
   document.getElementById("r-reparti").innerHTML=r;
 
   var g01=S.socle.g01,g03=S.socle.g03;
@@ -814,13 +826,13 @@ function renderCalc(){
   if(e.pess) L.push(e.pess+" entrevista"+(e.pess>1?"s":"")+" com áudio");
   if(e.seg)  L.push("segundo fotógrafo");
   if(c.mdl)  L.push(c.mdl.curto||"modelo em cena");
-  L.push("entrega : "+(e.prazo==="r"?"prazo rápido":(e.prazo==="u"?"prazo urgente":c.N.prazo)));
-  if(!e.trat&&!e.clip&&!e.reels&&!e.video)L.unshift("aucun livrable saisi");
+  L.push("entrega: "+(e.prazo==="r"?"prazo rápido":(e.prazo==="u"?"prazo urgente":c.N.prazo)));
+  if(!e.trat&&!e.clip&&!e.reels&&!e.video)L.unshift("nenhum entregável informado");
 
   var P=[
-    {t:"Pacote 01",tag:"",v:c.v01,li:[nf(100*g01/(1+g01),0)+" % moins cher que le 02","à définir : au moins "+minFotos+" fotos de moins"]},
-    {t:"Pacote 02",tag:"l'alvo",v:c.v02,li:L},
-    {t:"Pacote 03",tag:"ancrage",v:c.v03,li:["+"+nf(100*g03,0)+" % sur le 02","à définir : "+m(up3)+" de valeur en plus","par le physique, pas par les fotos"]}
+    {t:"Pacote 01",tag:"",v:c.v01,li:[nf(100*g01/(1+g01),0)+" % mais barato que o 02","a definir: pelo menos "+minFotos+" fotos a menos"]},
+    {t:"Pacote 02",tag:"o alvo",v:c.v02,li:L},
+    {t:"Pacote 03",tag:"âncora",v:c.v03,li:["+"+nf(100*g03,0)+" % sobre o 02","a definir: "+m(up3)+" de valor a mais","pelo físico, não pelas fotos"]}
   ];
   var pk="";
   for(var pi=0;pi<3;pi++){
@@ -832,62 +844,62 @@ function renderCalc(){
   document.getElementById("r-pacotes").innerHTML=pk;
 
   var e01=100*g01/(1+g01), R=[];
-  R.push([(g01>=.22&&g01<=.42)?"ok":"av","Écart 01",
-    "Le 02 coûte <strong>+"+nf(100*g01,0)+" %</strong> par rapport au 01 (le 01 est "+nf(e01,0)+" % moins cher). "+
-    ((g01>=.22&&g01<=.42)?"Dans la fourchette qui pousse vers le milieu : entre +25 et +40 %."
-     :(g01<.22?"Trop serré : les deux se ressemblent, le 01 n'aide plus à vendre le 02. Vise +25 à +40 %."
-              :"Trop large : à cet écart le client se contente du 01. Vise +25 à +40 %."))]);
-  R.push([(g03>=.40&&g03<=.80)?"ok":"av","Écart 03",
-    "Le 03 coûte <strong>+"+nf(100*g03,0)+" %</strong> par rapport au 02. "+
-    ((g03>=.40&&g03<=.80)?"Assez cher pour rendre le 02 raisonnable, assez juste pour rester crédible : entre +40 et +80 %."
-     :(g03<.40?"Trop proche du 02 : il ne joue plus son rôle d'ancrage. Vise +40 à +80 %."
-              :"Au-delà de +80 % il ne fait plus ancrage, il décrédibilise la grille."))]);
-  R.push(["ok","Livraison","Passer du 01 au 02 coûte <strong>"+m(up1)+"</strong>. Pour que le contrôle FCS passe, le 01 doit livrer au moins <strong>"+
-    minFotos+" fotos de moins</strong> que les "+e.trat+" du 02 (au prix de foto extra actuel, "+m(pFoto)+
-    "). C'est le minimum technique — la règle demande un écart de livraison bien plus grand que l'écart de prix, donc vise le double."]);
-  R.push(["ok","Le 03","Il coûte <strong>"+m(up3)+"</strong> de plus que le 02. C'est ce qu'il doit apporter en valeur, par le physique — álbum, vídeo, tirages — pas en ajoutant des fotos."]);
+  R.push([(g01>=.22&&g01<=.42)?"ok":"av","Diferença 01",
+    "O 02 custa <strong>+"+nf(100*g01,0)+" %</strong> em relação ao 01 (o 01 fica "+nf(e01,0)+" % mais barato). "+
+    ((g01>=.22&&g01<=.42)?"Dentro da faixa que empurra para o meio: entre +25 e +40 %."
+     :(g01<.22?"Apertado demais: os dois se parecem e o 01 deixa de ajudar a vender o 02. Mire +25 a +40 %."
+              :"Largo demais: nessa diferença o cliente se contenta com o 01. Mire +25 a +40 %."))]);
+  R.push([(g03>=.40&&g03<=.80)?"ok":"av","Diferença 03",
+    "O 03 custa <strong>+"+nf(100*g03,0)+" %</strong> em relação ao 02. "+
+    ((g03>=.40&&g03<=.80)?"Caro o bastante para deixar o 02 razoável, contido o bastante para seguir crível: entre +40 e +80 %."
+     :(g03<.40?"Perto demais do 02: ele deixa de fazer o papel de âncora. Mire +40 a +80 %."
+              :"Acima de +80 % ele deixa de ancorar e passa a tirar a credibilidade da tabela."))]);
+  R.push(["ok","Entrega","Subir do 01 para o 02 custa <strong>"+m(up1)+"</strong>. Para o controle FCS passar, o 01 precisa entregar pelo menos <strong>"+
+    minFotos+" fotos a menos</strong> que as "+e.trat+" do 02 (ao preço atual da foto extra, "+m(pFoto)+
+    "). Esse é o mínimo técnico. A regra pede uma diferença de entrega bem maior que a diferença de preço, então mire o dobro."]);
+  R.push(["ok","O 03","Ele custa <strong>"+m(up3)+"</strong> a mais que o 02. É isso que precisa aparecer em valor, pelo físico: álbum, vídeo, impressões. Não somando fotos."]);
   document.getElementById("r-regras").innerHTML=als(R);
 
-  var ex='<thead><tr><th>Extra</th><th class="n">Minutes de travail</th><th class="n">Ce que ça te coûte</th><th class="n">Ce que tu factures</th><th class="n">Combien de fois le coût</th></tr></thead><tbody>';
+  var ex='<thead><tr><th>Extra</th><th class="n">Minutos de trabalho</th><th class="n">O que te custa</th><th class="n">O que você cobra</th><th class="n">Quantas vezes o custo</th></tr></thead><tbody>';
   for(var y=0;y<S.extras.length;y++){
     var E=S.extras[y], emin=extraMin(E), cst=E.rep?E.preco:(emin/60)*c.hv;
-    ex+='<tr><td>'+esc(E.n)+(E.rep?'<span class="sub">frais avancé</span>':'')+
-        (E.mk?'<span class="sub">durée reprise de « '+esc(nomModule(E.mk))+' »</span>':'')+
+    ex+='<tr><td>'+esc(E.n)+(E.rep?'<span class="sub">despesa adiantada</span>':'')+
+        (E.mk?'<span class="sub">duração vinda de « '+esc(nomModule(E.mk))+' »</span>':'')+
         '</td><td class="n">'+(emin?emin:"—")+'</td><td class="n">'+m2(cst)+
         '</td><td class="n">'+m(E.preco)+'</td><td class="n">'+(E.rep?"—":"×"+nf(cst?E.preco/cst:0,1))+'</td></tr>';}
   document.getElementById("r-extras").innerHTML=ex+'</tbody>';
 
   var A=[];
-  if(!c.N.piso)A.push(["av","Piso","Aucun prix plancher fixé dans cette niche. Le premier travail conclu devient le plancher."]);
-  else if(c.cobrado<c.N.piso)A.push(["er","Piso","<strong>Sous le plancher.</strong> Tu annonces "+m(c.cobrado)+" alors que le plancher de la niche est "+m(c.N.piso)+". Facture le plancher, ou livre moins."]);
-  else A.push(["ok","Piso","Au-dessus du plancher de la niche ("+m(c.N.piso)+")."]);
+  if(!c.N.piso)A.push(["av","Piso","Nenhum piso definido neste nicho. O primeiro trabalho fechado vira o piso."]);
+  else if(c.cobrado<c.N.piso)A.push(["er","Piso","<strong>Abaixo do piso.</strong> Você anuncia "+m(c.cobrado)+" e o piso do nicho é "+m(c.N.piso)+". Cobre o piso, ou entregue menos."]);
+  else A.push(["ok","Piso","Acima do piso do nicho ("+m(c.N.piso)+")."]);
   if(c.horas&&c.horaLiquida<S.socle.pisoHora)
-    A.push(["er","Heure","<strong>"+m2(c.horaLiquida)+"/h</strong> une fois les "+m(c.diretos)+" de coûts directs retirés, sous ton plancher de "+m(S.socle.pisoHora)+"/h. Enlève des livrables, ne baisse pas le prix."]);
+    A.push(["er","Hora","<strong>"+m2(c.horaLiquida)+"/h</strong> depois de tirar "+m(c.diretos)+" de custos diretos, abaixo do seu piso de "+m(S.socle.pisoHora)+"/h. Tire entregáveis, não baixe o preço."]);
   else if(c.horas){
     var ecart=c.horaReal-taxa();
-    var qual=Math.abs(ecart)<1?"pile sur ta cible de "+m2(taxa())
-      :(ecart>0?m2(ecart)+"/h au-dessus de ta cible":m2(-ecart)+"/h sous ta cible de "+m2(taxa()));
-    A.push(["ok","Heure",m2(c.horaLiquida)+"/h hors coûts directs, au-dessus du plancher de "+m(S.socle.pisoHora)+". Ta rémunération ressort à "+m2(c.horaReal)+"/h, "+qual+"."]);
+    var qual=Math.abs(ecart)<1?"exatamente no seu alvo de "+m2(taxa())
+      :(ecart>0?m2(ecart)+"/h acima do seu alvo":m2(-ecart)+"/h abaixo do seu alvo de "+m2(taxa()));
+    A.push(["ok","Hora",m2(c.horaLiquida)+"/h fora dos custos diretos, acima do piso de "+m(S.socle.pisoHora)+". Sua remuneração fica em "+m2(c.horaReal)+"/h, "+qual+"."]);
   }
   if(e.cobrar>0&&e.cobrar<c.v02){var d=c.v02-e.cobrar;
-    A.push(["er","Remise","<strong>Tu descends de "+m(d)+"</strong> ("+nf(100*d/c.v02,0)+" %) sous le calcul. Ton heure passe de "+m2(taxa())+" à "+m2(c.horaReal)+". Si tu acceptes, enlève des livrables."]);}
-  else if(e.cobrar>c.v02)A.push(["ok","Marge","Tu annonces "+m(e.cobrar-c.v02)+" de plus que le calcul. Ton heure monte à "+m2(c.horaReal)+"."]);
+    A.push(["er","Desconto","<strong>Você desce "+m(d)+"</strong> ("+nf(100*d/c.v02,0)+" %) abaixo do cálculo. Sua hora vai de "+m2(taxa())+" para "+m2(c.horaReal)+". Se aceitar, tire entregáveis."]);}
+  else if(e.cobrar>c.v02)A.push(["ok","Margem","Você anuncia "+m(e.cobrar-c.v02)+" a mais que o cálculo. Sua hora sobe para "+m2(c.horaReal)+"."]);
   if(c.mdl){
     var mh=c.mdl.horas||0, okh=!mh||e.local<=mh;
     A.push([okh?"ok":"av","Modelo",
-      "Palier <strong>"+esc(c.mdl.n)+"</strong> à "+m(c.mdl.preco)+", repassé au prix coûtant dans les coûts directs. "+
-      (okh?("Usage couvert : "+esc(c.mdl.uso)+". À écrire dans le combinado avant le tournage, jamais après.")
-          :("La cobertura saisie est de "+nf(e.local,e.local%1?1:0)+"h alors que ce palier couvre "+nf(mh,mh%1?1:0)+"h de présence. Passe au palier au-dessus ou ajoute des heures en extra, sinon le cachê est sous-évalué."))]);
+      "Faixa <strong>"+esc(c.mdl.n)+"</strong> a "+m(c.mdl.preco)+", repassada a preço de custo nos custos diretos. "+
+      (okh?("Uso coberto: "+esc(c.mdl.uso)+". Escreva no combinado antes da captação, nunca depois.")
+          :("A cobertura informada é de "+nf(e.local,e.local%1?1:0)+"h e esta faixa cobre "+nf(mh,mh%1?1:0)+"h de presença. Suba para a faixa de cima ou acrescente horas em extra, senão o cachê fica subestimado."))]);
   }
-  if(c.N.mmax&&c.v02>c.N.mmax)A.push(["av","Marché","Le calcul ("+m(c.v02)+") dépasse le haut du marché de cette niche ("+m(c.N.mmax)+"). Réduis la livraison plutôt que le prix."]);
-  else if(c.N.mmin&&c.v02<c.N.mmin)A.push(["av","Marché","Le calcul est sous le plancher marché de la niche ("+m(c.N.mmin)+"). Tu peux monter sans risque."]);
+  if(c.N.mmax&&c.v02>c.N.mmax)A.push(["av","Mercado","O cálculo ("+m(c.v02)+") passa do teto de mercado deste nicho ("+m(c.N.mmax)+"). Reduza a entrega em vez do preço."]);
+  else if(c.N.mmin&&c.v02<c.N.mmin)A.push(["av","Mercado","O cálculo está abaixo do piso de mercado do nicho ("+m(c.N.mmin)+"). Dá para subir sem risco."]);
   document.getElementById("r-alerts").innerHTML=als(A);
 }
 function als(A){var o=""; for(var i=0;i<A.length;i++)o+='<div class="al '+A[i][0]+'"><span class="k">'+A[i][1]+'</span><span>'+A[i][2]+'</span></div>'; return o;}
 
 /* ================= tableau de bord ================= */
-var MOISFMT=new Intl.DateTimeFormat("fr-FR",{month:"short",year:"2-digit"});
-var MOISLONG=new Intl.DateTimeFormat("fr-FR",{month:"long",year:"numeric"});
+var MOISFMT=new Intl.DateTimeFormat("pt-BR",{month:"short",year:"2-digit"});
+var MOISLONG=new Intl.DateTimeFormat("pt-BR",{month:"long",year:"numeric"});
 function mkey(d){return String(d||"").slice(0,7);}
 function mlabel(k,long){
   var p=k.split("-"); if(p.length<2)return k;
@@ -928,17 +940,17 @@ function renderDash(){
 
   var st=statsMois(sel), obj=S.socle.objetivo||S.socle.despesas||1;
   var pctObj=100*st.fat/obj;
-  document.getElementById("d-hint").textContent=st.n?(st.n+" mission"+(st.n>1?"s":"")+" facturée"+(st.n>1?"s":"")):"aucune mission facturée ce mois";
-  document.getElementById("d-titre-chart").textContent="Les "+P+" derniers mois";
-  document.getElementById("d-niches-hint").textContent="sur les "+P+" derniers mois";
+  document.getElementById("d-hint").textContent=st.n?(st.n+" trabalho"+(st.n>1?"s":"")+" faturado"+(st.n>1?"s":"")):"nenhum trabalho faturado neste mês";
+  document.getElementById("d-titre-chart").textContent="Os últimos "+P+" meses";
+  document.getElementById("d-niches-hint").textContent="nos últimos "+P+" meses";
 
   var T=[
-    ["Facturé",m(st.fat),"missions signées et payées",1],
-    ["Encaissé",m(st.pago),st.fat>st.pago?m(st.fat-st.pago)+" encore à encaisser":"tout est rentré",0],
-    ["Pipeline",m(st.prop),st.prop?"proposé, rien de signé":"aucune proposition en attente",0],
-    ["Objectif",nf(pctObj,0)+" %",m(obj)+" par mois",0],
-    ["Heures travaillées",h(st.horas),st.horas?nf(st.horas,1)+" h réelles":"—",0],
-    ["Ton heure réelle",st.horas?m2(st.fat*(1-S.socle.marge)/st.horas):"—","cible "+m2(taxa()),0]
+    ["Faturado",m(st.fat),"trabalhos fechados e pagos",1],
+    ["Recebido",m(st.pago),st.fat>st.pago?m(st.fat-st.pago)+" ainda a receber":"tudo entrou",0],
+    ["Pipeline",m(st.prop),st.prop?"proposto, nada fechado":"nenhuma proposta em aberto",0],
+    ["Meta",nf(pctObj,0)+" %",m(obj)+" por mês",0],
+    ["Horas trabalhadas",h(st.horas),st.horas?nf(st.horas,1)+" h reais":"—",0],
+    ["Sua hora real",st.horas?m2(st.fat*(1-S.socle.marge)/st.horas):"—","alvo "+m2(taxa()),0]
   ];
   var th="";
   for(i=0;i<T.length;i++)th+='<div class="tile"><span class="eyebrow">'+esc(T[i][0])+'</span><b class="num'+(T[i][3]?" hi":"")+'">'+esc(T[i][1])+'</b><small>'+esc(T[i][2])+'</small></div>';
@@ -947,9 +959,9 @@ function renderDash(){
   var w=Math.max(0,Math.min(100,pctObj)), over=st.fat>=obj;
   document.getElementById("d-meter").innerHTML=
     '<div class="track"><div class="fill'+(over?" over":"")+'" style="width:'+w.toFixed(1)+'%"></div></div>'+
-    '<div class="legend"><span>'+esc(m(st.fat))+' sur '+esc(m(obj))+'</span><span>'+
-    (over?"objectif dépassé de "+esc(m(st.fat-obj)):"reste "+esc(m(obj-st.fat)))+
-    (st.prop?' · '+esc(m(st.prop))+' proposé en attente':'')+'</span></div>';
+    '<div class="legend"><span>'+esc(m(st.fat))+' de '+esc(m(obj))+'</span><span>'+
+    (over?"meta superada em "+esc(m(st.fat-obj)):"faltam "+esc(m(obj-st.fat)))+
+    (st.prop?' · '+esc(m(st.prop))+' proposto em aberto':'')+'</span></div>';
 
   drawChart(sel);
 
@@ -957,13 +969,13 @@ function renderDash(){
   for(i=0;i<LN.length;i++){var sx=statsMois(LN[i]); if(sx.fat||sx.horas)actifs.push([LN[i],sx]); else vides++;}
   var tb="";
   if(actifs.length){
-    tb='<thead><tr><th>Mois</th><th class="n">Facturé</th><th class="n">Encaissé</th><th class="n">Heures</th><th class="n">Objectif</th></tr></thead><tbody>';
+    tb='<thead><tr><th>Mês</th><th class="n">Faturado</th><th class="n">Recebido</th><th class="n">Horas</th><th class="n">Meta</th></tr></thead><tbody>';
     for(i=actifs.length-1;i>=0;i--){var s2=actifs[i][1];
       tb+='<tr><td>'+esc(mlabel(actifs[i][0],1))+'</td><td class="n">'+m(s2.fat)+'</td><td class="n">'+m(s2.pago)+
           '</td><td class="n">'+(s2.horas?h(s2.horas):"—")+'</td><td class="n">'+nf(100*s2.fat/obj,0)+' %</td></tr>';}
-    if(vides)tb+='<tr class="z"><td>'+vides+' autre'+(vides>1?"s":"")+' mois sans mission</td><td class="n">R$ 0</td><td class="n">R$ 0</td><td class="n">—</td><td class="n">—</td></tr>';
+    if(vides)tb+='<tr class="z"><td>'+vides+' outro'+(vides>1?"s":"")+' '+(vides>1?"meses":"mês")+' sem trabalho</td><td class="n">R$ 0</td><td class="n">R$ 0</td><td class="n">—</td><td class="n">—</td></tr>';
     tb+="</tbody>";
-  }else tb='<tbody><tr><td class="z">Aucune mission enregistrée sur la période.</td></tr></tbody>';
+  }else tb='<tbody><tr><td class="z">Nenhum trabalho registrado no período.</td></tr></tbody>';
   document.getElementById("d-table").innerHTML=tb;
 
   var byN={}, tot=0;
@@ -977,24 +989,24 @@ function renderDash(){
     bl+='<div class="blrow"><div><span class="blname">'+esc(keys[i])+' <span style="color:var(--tx-3);font-weight:400">· '+nf(100*byN[keys[i]]/(tot||1),0)+' %</span></span>'+
         '<div class="bltrack"><div class="blfill" style="width:'+(100*byN[keys[i]]/mx).toFixed(1)+'%"></div></div></div>'+
         '<span class="blval num">'+m(byN[keys[i]])+'</span></div>';
-  document.getElementById("d-niches").innerHTML=bl||'<p class="note">Aucune mission facturée sur la période.</p>';
+  document.getElementById("d-niches").innerHTML=bl||'<p class="note">Nenhum trabalho faturado no período.</p>';
 
-  var ORD=[["proposto","Proposé"],["fechado","Facturé"],["pago","Payé"]];
+  var ORD=[["proposto","Proposto"],["fechado","Fechado"],["pago","Pago"]];
   var idx=S.missions.map(function(M,j){return j;}).sort(function(a,b){
     return String(S.missions[b].d).localeCompare(String(S.missions[a].d));});
-  var mt='<thead><tr><th>Date</th><th>Client</th><th>Type de travail</th><th class="n">Valor R$</th><th class="n">Heures</th><th>Statut</th><th></th></tr></thead><tbody>';
+  var mt='<thead><tr><th>Data</th><th>Cliente</th><th>Tipo de trabalho</th><th class="n">Valor R$</th><th class="n">Horas</th><th>Status</th><th></th></tr></thead><tbody>';
   for(i=0;i<idx.length;i++){var j=idx[i], M2=S.missions[j];
     var so=""; for(var z=0;z<ORD.length;z++)so+='<option value="'+ORD[z][0]+'"'+(M2.st===ORD[z][0]?" selected":"")+">"+ORD[z][1]+"</option>";
     var no=""; for(var y=0;y<S.niches.length;y++)no+='<option value="'+esc(S.niches[y].n)+'"'+(M2.niche===S.niches[y].n?" selected":"")+">"+esc(S.niches[y].n)+"</option>";
     if(M2.niche&&!S.niches.some(function(N){return N.n===M2.niche;}))no='<option selected>'+esc(M2.niche)+"</option>"+no;
     mt+='<tr><td><input type="date" value="'+esc(M2.d)+'" onchange="setMi('+j+',\'d\',this.value)"></td>'+
-        '<td><input type="text" value="'+esc(M2.cli)+'" placeholder="nom du client" oninput="setMi('+j+',\'cli\',this.value)"></td>'+
+        '<td><input type="text" value="'+esc(M2.cli)+'" placeholder="nome do cliente" oninput="setMi('+j+',\'cli\',this.value)"></td>'+
         '<td><select onchange="setMi('+j+',\'niche\',this.value)">'+no+'</select></td>'+
         '<td class="n"><input type="number" step="50" value="'+(+M2.valor||0)+'" oninput="setMi('+j+',\'valor\',+this.value)"></td>'+
         '<td class="n"><input type="number" step="0.5" value="'+(+M2.horas||0)+'" oninput="setMi('+j+',\'horas\',+this.value)"></td>'+
         '<td><select onchange="setMi('+j+',\'st\',this.value)" class="st '+esc(M2.st)+'">'+so+'</select></td>'+
-        '<td class="n"><button class="btn ghost sm" onclick="delMi('+j+')">Retirer</button></td></tr>';}
-  if(!idx.length)mt+='<tr><td colspan="7" class="z">Aucune mission. Ajoute la première avec le bouton ci-dessus, ou depuis la calculadora.</td></tr>';
+        '<td class="n"><button class="btn ghost sm" onclick="delMi('+j+')">Remover</button></td></tr>';}
+  if(!idx.length)mt+='<tr><td colspan="7" class="z">Nenhum trabalho ainda. Adicione o primeiro pelo botão acima, ou pela calculadora.</td></tr>';
   document.getElementById("d-missions").innerHTML=mt+"</tbody>";
 }
 
@@ -1014,7 +1026,7 @@ function drawChart(sel){
         '<stop offset="0%" stop-color="'+acc2+'"/><stop offset="100%" stop-color="'+acc+'"/></linearGradient></defs>';
   g+='<line class="baseline" x1="0" y1="'+base+'" x2="'+W+'" y2="'+base+'"/>';
   g+='<line class="goalline" x1="0" y1="'+y(obj).toFixed(1)+'" x2="'+W+'" y2="'+y(obj).toFixed(1)+'"/>';
-  g+='<text class="axlab" x="'+(W-2)+'" y="'+(y(obj)-7).toFixed(1)+'" text-anchor="end">objectif '+esc(m(obj))+'</text>';
+  g+='<text class="axlab" x="'+(W-2)+'" y="'+(y(obj)-7).toFixed(1)+'" text-anchor="end">meta '+esc(m(obj))+'</text>';
   for(var i=0;i<P;i++){
     var x=i*slot+off, v=vals[i], yy=y(v), hh=base-yy, on=(L[i]===sel);
     if(v>0){
@@ -1038,8 +1050,8 @@ function drawChart(sel){
     var r=ev.target.getAttribute&&ev.target.getAttribute("data-i");
     if(r===null||r===undefined){tip.className="tip"; return;}
     var i2=+r, s2=statsMois(L[i2]);
-    tip.innerHTML="<b>"+esc(mlabel(L[i2],1))+"</b><br>facturé "+esc(m(s2.fat))+"<br>encaissé "+esc(m(s2.pago))+
-      "<br>"+(s2.horas?esc(h(s2.horas))+" de travail":"aucune heure");
+    tip.innerHTML="<b>"+esc(mlabel(L[i2],1))+"</b><br>faturado "+esc(m(s2.fat))+"<br>recebido "+esc(m(s2.pago))+
+      "<br>"+(s2.horas?esc(h(s2.horas))+" de trabalho":"nenhuma hora");
     tip.className="tip on";
     var wr=wrap.getBoundingClientRect();
     var lx=ev.clientX-wr.left+14, ly=ev.clientY-wr.top-10;
@@ -1068,23 +1080,23 @@ function addMission(){
   S.missions.push({d:n.getFullYear()+"-"+String(n.getMonth()+1).padStart(2,"0")+"-"+String(n.getDate()).padStart(2,"0"),
     cli:"",niche:c.N.n,valor:Math.round(c.cobrado),horas:Math.round(c.horas*100)/100,st:"proposto"});
   persist();
-  flash("r-saved","Ajoutée en « proposé » — nomme le client dans le tableau de bord");
+  flash("r-saved","Adicionado como proposto. Dê o nome do cliente no painel.");
 }
 function clearMissions(){
   if(!S.missions.length)return;
-  if(!window.confirm("Supprimer les "+S.missions.length+" missions enregistrées ? C'est irréversible."))return;
-  S.missions=[]; persist(); renderDash(); flash("q-saved","Missions supprimées");
+  if(!window.confirm("Excluir os "+S.missions.length+" trabalhos registrados? Isso não tem volta."))return;
+  S.missions=[]; persist(); renderDash(); flash("q-saved","Trabalhos excluídos");
 }
 function exportCSV(){
-  var rows=[["date","client","type","valor","horas","statut"]];
+  var rows=[["data","cliente","tipo","valor","horas","status"]];
   var cp=S.missions.slice().sort(function(a,b){return String(a.d).localeCompare(String(b.d));});
   for(var i=0;i<cp.length;i++)rows.push([cp[i].d,cp[i].cli,cp[i].niche,cp[i].valor,cp[i].horas,cp[i].st]);
   var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c==null?"":c).replace(/"/g,'""')+'"';}).join(";");}).join("\n");
   var a=document.createElement("a");
   a.href=URL.createObjectURL(new Blob(["﻿"+csv],{type:"text/csv;charset=utf-8"}));
-  a.download="missions-"+new Date().toISOString().slice(0,10)+".csv";
+  a.download="trabalhos-"+new Date().toISOString().slice(0,10)+".csv";
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
-  flash("q-saved","CSV exporté");
+  flash("q-saved","CSV exportado");
 }
 
 /* ================= paramètres ================= */
@@ -1099,19 +1111,19 @@ function renderPar(){
   majFormule();
 
   var C=[
-    ["ov","Heures fixes par prestation","trajet aller-retour, prépa, import, livraison — hors temps sur place",0.5],
-    ["mf","Minutes pour éditer une photo","le temps que tu passes vraiment sur une image",0.5],
-    ["mt","Minutes pour trier une photo","appliqué au total de clics du jour, pas aux photos livrées",0.05],
-    ["prazo","Délai de livraison standard","ce que tu annonces sans supplément",null],
-    ["piso","Prix plancher R$","jamais moins que ça. 0 = rien encore conclu ici",50],
-    ["mmin","Marché — le plus bas R$","ce que facture le moins cher. 0 = inconnu",50],
-    ["mmax","Marché — le plus haut R$","au-dessus, tu sors du marché. 0 = inconnu",50]
+    ["ov","Horas fixas por trabalho","ida e volta, preparação, importação, entrega, fora o tempo no local",0.5],
+    ["mf","Minutos para editar uma foto","o tempo que você passa de verdade em uma imagem",0.5],
+    ["mt","Minutos para selecionar uma foto","aplicado ao total de cliques do dia, não às fotos entregues",0.05],
+    ["prazo","Prazo de entrega padrão","o que você anuncia sem acréscimo",null],
+    ["piso","Preço piso R$","nunca menos que isso. 0 = nada fechado aqui ainda",50],
+    ["mmin","Mercado, o mais baixo R$","o que cobra o mais barato. 0 = desconhecido",50],
+    ["mmax","Mercado, o mais alto R$","acima disso você sai do mercado. 0 = desconhecido",50]
   ];
   var t="";
   for(var i=0;i<S.niches.length;i++){var N=S.niches[i];
     t+='<div class="nicheblk"><div class="nichehd">'+
-       '<input type="text" value="'+esc(N.n)+'" oninput="setN('+i+',\'n\',this.value)" aria-label="Nom de la niche">'+
-       '<button class="btn ghost sm" style="margin-left:auto" onclick="delN('+i+')">Supprimer</button>'+
+       '<input type="text" value="'+esc(N.n)+'" oninput="setN('+i+',\'n\',this.value)" aria-label="Nome do nicho">'+
+       '<button class="btn ghost sm" style="margin-left:auto" onclick="delN('+i+')">Excluir</button>'+
        '</div><div class="ngrid">';
     for(var j=0;j<C.length;j++){var F=C[j];
       t+='<label>'+esc(F[1])+'<i>'+esc(F[2])+'</i>'+
@@ -1123,39 +1135,39 @@ function renderPar(){
 
   var mh="";
   for(var k=0;k<S.modules.length;k++)
-    mh+='<div class="field"><label>'+esc(S.modules[k].n)+'<span class="sub">minutes de travail</span></label>'+
+    mh+='<div class="field"><label>'+esc(S.modules[k].n)+'<span class="sub">minutos de trabalho</span></label>'+
         '<input type="number" step="5" value="'+S.modules[k].min+'" oninput="setM('+k+',+this.value)"></div>';
   document.getElementById("p-modules").innerHTML=mh;
 
   var md="";
   for(var z=0;z<S.modelo.length;z++){var MD=S.modelo[z];
     md+='<div class="nicheblk"><div class="nichehd">'+
-       '<input type="text" value="'+esc(MD.n)+'" oninput="setMd('+z+',\'n\',this.value)" aria-label="Nom du palier">'+
-       '<button class="btn ghost sm" style="margin-left:auto" onclick="delMd('+z+')">Supprimer</button>'+
+       '<input type="text" value="'+esc(MD.n)+'" oninput="setMd('+z+',\'n\',this.value)" aria-label="Nome da faixa">'+
+       '<button class="btn ghost sm" style="margin-left:auto" onclick="delMd('+z+')">Excluir</button>'+
        '</div><div class="ngrid">'+
-       '<label>Cachê R$<i>ce que la modèle reçoit, repassé tel quel</i><input type="number" step="25" min="0" value="'+MD.preco+'" oninput="setMd('+z+',\'preco\',+this.value)"></label>'+
-       '<label>Heures couvertes<i>préparation, changements et attente compris</i><input type="number" step="0.5" min="0" value="'+MD.horas+'" oninput="setMd('+z+',\'horas\',+this.value)"></label>'+
-       '<label>Usage des images<i>ce que le client a le droit d\'en faire</i><input type="text" value="'+esc(MD.uso)+'" oninput="setMd('+z+',\'uso\',this.value)"></label>'+
-       '<label>Ligne du pacote<i>comme elle apparaît dans la proposta</i><input type="text" value="'+esc(MD.curto)+'" oninput="setMd('+z+',\'curto\',this.value)"></label>'+
+       '<label>Cachê R$<i>o que a modelo recebe, repassado igual</i><input type="number" step="25" min="0" value="'+MD.preco+'" oninput="setMd('+z+',\'preco\',+this.value)"></label>'+
+       '<label>Horas cobertas<i>preparação, trocas de roupa e espera incluídas</i><input type="number" step="0.5" min="0" value="'+MD.horas+'" oninput="setMd('+z+',\'horas\',+this.value)"></label>'+
+       '<label>Uso das imagens<i>o que o cliente pode fazer com elas</i><input type="text" value="'+esc(MD.uso)+'" oninput="setMd('+z+',\'uso\',this.value)"></label>'+
+       '<label>Linha do pacote<i>como aparece na proposta</i><input type="text" value="'+esc(MD.curto)+'" oninput="setMd('+z+',\'curto\',this.value)"></label>'+
        '</div></div>';}
-  md+='<button class="btn ghost sm" onclick="addMd()">+ Ajouter un palier</button>';
+  md+='<button class="btn ghost sm" onclick="addMd()">+ Adicionar uma faixa</button>';
   document.getElementById("p-modelo").innerHTML=md;
 
   var hv=horaVenda();
-  var ex='<thead><tr><th>Extra</th><th class="n">Minutes de travail<i>ce que ça te prend</i></th>'+
-    '<th class="n">Ce que ça te coûte<i>calculé</i></th><th class="n">Ce que tu factures<i>à toi de fixer</i></th>'+
-    '<th class="n">Multiple<i>combien de fois le coût</i></th>'+
-    '<th class="n">Frais avancé<i>1 = revendu au prix coûtant</i></th><th></th></tr></thead><tbody>';
+  var ex='<thead><tr><th>Extra</th><th class="n">Minutos de trabalho<i>o que te toma</i></th>'+
+    '<th class="n">O que te custa<i>calculado</i></th><th class="n">O que você cobra<i>você que define</i></th>'+
+    '<th class="n">Múltiplo<i>quantas vezes o custo</i></th>'+
+    '<th class="n">Despesa adiantada<i>1 = revendida a preço de custo</i></th><th></th></tr></thead><tbody>';
   for(var y=0;y<S.extras.length;y++){var E=S.extras[y], emin=extraMin(E), cst=E.rep?E.preco:(emin/60)*hv;
     ex+='<tr><td><input type="text" value="'+esc(E.n)+'" oninput="setE('+y+',\'n\',this.value)">'+
-      (E.mk?'<i style="display:block">durée reprise du module « '+esc(nomModule(E.mk))+' »</i>':'')+'</td>'+
+      (E.mk?'<i style="display:block">duração vinda do módulo « '+esc(nomModule(E.mk))+' »</i>':'')+'</td>'+
       '<td class="n"><input type="number" step="5" data-min="'+y+'" value="'+emin+'"'+
         (E.mk?' readonly tabindex="-1" style="opacity:.55"':' oninput="setE('+y+',\'min\',+this.value)"')+'></td>'+
       '<td class="n" data-cst="'+y+'">'+m2(cst)+'</td>'+
       '<td class="n"><input type="number" step="5" value="'+E.preco+'" oninput="setE('+y+',\'preco\',+this.value)"></td>'+
       '<td class="n" data-mult="'+y+'">'+(E.rep?"—":"×"+nf(cst?E.preco/cst:0,1))+'</td>'+
       '<td class="n"><input type="number" min="0" max="1" step="1" value="'+E.rep+'" oninput="setE('+y+',\'rep\',+this.value)"></td>'+
-      '<td class="n"><button class="btn ghost sm" onclick="delE('+y+')">Retirer</button></td></tr>';}
+      '<td class="n"><button class="btn ghost sm" onclick="delE('+y+')">Remover</button></td></tr>';}
   document.getElementById("p-extras").innerHTML=ex+"</tbody>";
   syncJSON();
 }
@@ -1163,19 +1175,19 @@ function renderParDash(){
   set("q-obj",S.socle.objetivo); set("q-desp",S.socle.despesas); set("q-per",String(periode()));
   var obj=S.socle.objetivo||S.socle.despesas||1, c=calcule();
   document.getElementById("q-formula").textContent=
-    "Objectif du mois = "+m(obj)+
-    "\nAu Pacote 02 actuel ("+m(c.v02)+"), il faut "+nf(obj/(c.v02||1),1)+" mission"+(obj/(c.v02||1)>1?"s":"")+" par mois."+
-    "\nDépenses fixes couvertes à partir de "+m(S.socle.despesas)+" facturés.";
+    "Meta do mês = "+m(obj)+
+    "\nNo Pacote 02 atual ("+m(c.v02)+"), são "+nf(obj/(c.v02||1),1)+" trabalho"+(obj/(c.v02||1)>1?"s":"")+" por mês."+
+    "\nDespesas fixas cobertas a partir de "+m(S.socle.despesas)+" faturados.";
 }
 function majFormule(){
   var s=S.socle;
   document.getElementById("p-formula").textContent=
-    "1h de ton temps = "+m2(taxa())+"\n1h vendue = "+m2(taxa())+" ÷ (1 − "+nf(s.marge*100,0)+" %) = "+m2(horaVenda())+
-    "\n\nValor = coûts directs + (heures × "+m2(horaVenda())+") × multiplicateur de prazo"+
-    "\nContrôle du plancher = (prix − coûts directs) ÷ heures ≥ "+m(s.pisoHora)+"/h"+
-    "\n\nCe réglage suppose "+nf(s.dias*4,0)+" jours vendus par mois, soit "+nf(s.dias*4*12,0)+" jours par an."+
-    "\nRéférence hôtellerie : 12 à 15 jours sur 9 à 10 mois actifs, soit 120 à 150 jours par an."+
-    (s.dias*48>150?"\nTu es encore au-dessus de cette référence : à "+nf(s.dias*48,0)+" jours vendus, ton heure est optimiste.":"");
+    "1h do seu tempo = "+m2(taxa())+"\n1h vendida = "+m2(taxa())+" ÷ (1 − "+nf(s.marge*100,0)+" %) = "+m2(horaVenda())+
+    "\n\nValor = custos diretos + (horas × "+m2(horaVenda())+") × multiplicador de prazo"+
+    "\nControle do piso = (preço − custos diretos) ÷ horas ≥ "+m(s.pisoHora)+"/h"+
+    "\n\nEste ajuste supõe "+nf(s.dias*4,0)+" dias vendidos por mês, ou "+nf(s.dias*4*12,0)+" dias por ano."+
+    "\nReferência em hotelaria: 12 a 15 dias em 9 a 10 meses ativos, ou 120 a 150 dias por ano."+
+    (s.dias*48>150?"\nVocê ainda está acima dessa referência: com "+nf(s.dias*48,0)+" dias vendidos, sua hora fica otimista.":"");
 }
 /* Met a jour les cellules calculees du panneau parametres sans reconstruire les champs,
    pour ne pas voler le focus pendant la saisie. */
@@ -1198,29 +1210,29 @@ function setN(i,k,v){
   S.niches[i][k]=v; refresh();
 }
 function delN(i){if(S.niches.length<2)return; S.niches.splice(i,1); if(S.entrada.niche>=S.niches.length)S.entrada.niche=0; renderAll();}
-function addNiche(){S.niches.push({n:"Nouvelle niche",ov:2,mf:2,mt:.15,prazo:"7 jours",piso:0,mmin:0,mmax:0}); renderAll();}
+function addNiche(){S.niches.push({n:"Novo nicho",ov:2,mf:2,mt:.15,prazo:"7 dias",piso:0,mmin:0,mmax:0}); renderAll();}
 function setM(i,v){S.modules[i].min=v; refresh();}
 function setMd(i,k,v){S.modelo[i][k]=v; refresh();}
 function delMd(i){S.modelo.splice(i,1); if(S.entrada.modelo!==""&&+S.entrada.modelo>=S.modelo.length)S.entrada.modelo=""; renderAll();}
-function addMd(){S.modelo.push({n:"Nouveau palier",preco:400,horas:2,uso:"redes sociais do cliente",curto:"modelo em cena"}); renderAll();}
+function addMd(){S.modelo.push({n:"Nova faixa",preco:400,horas:2,uso:"redes sociais do cliente",curto:"modelo em cena"}); renderAll();}
 function setE(i,k,v){S.extras[i][k]=v; refresh();}
 function delE(i){S.extras.splice(i,1); renderAll();}
-function addExtra(){S.extras.push({n:"Nouvel extra",preco:100,min:30,rep:0}); renderAll();}
+function addExtra(){S.extras.push({n:"Novo extra",preco:100,min:30,rep:0}); renderAll();}
 
 function syncJSON(){var e=document.getElementById("p-json"); if(e&&document.activeElement!==e)e.value=JSON.stringify(S,null,1);}
 function exportJSON(){
   var ta=document.getElementById("p-json"); ta.value=JSON.stringify(S,null,1); ta.select();
   if(navigator.clipboard&&navigator.clipboard.writeText)
-    navigator.clipboard.writeText(ta.value).then(function(){flash("p-saved","JSON copié");},function(){flash("p-saved","Sélectionné — fais Ctrl+C");});
-  else flash("p-saved","Sélectionné — fais Ctrl+C");
+    navigator.clipboard.writeText(ta.value).then(function(){flash("p-saved","JSON copiado");},function(){flash("p-saved","Selecionado, faça Ctrl+C");});
+  else flash("p-saved","Selecionado, faça Ctrl+C");
 }
 function importJSON(){
-  try{S=merge(clone(DEFAULTS),JSON.parse(document.getElementById("p-json").value)); save(); renderAll(); applyTheme(); flash("p-saved","Importé");}
-  catch(err){flash("p-saved","JSON invalide — rien n'a changé","er");}
+  try{S=merge(clone(DEFAULTS),JSON.parse(document.getElementById("p-json").value)); save(); renderAll(); applyTheme(); flash("p-saved","Importado");}
+  catch(err){flash("p-saved","JSON inválido, nada mudou","er");}
 }
 function resetAll(){
-  if(!window.confirm("Revenir aux valeurs d'origine ? Les missions enregistrées seront remplacées."))return;
-  S=clone(DEFAULTS); save(); renderAll(); applyTheme(); flash("p-saved","Valeurs d'origine restaurées");
+  if(!window.confirm("Voltar aos valores de origem? Os trabalhos registrados serão substituídos."))return;
+  S=clone(DEFAULTS); save(); renderAll(); applyTheme(); flash("p-saved","Valores de origem restaurados");
 }
 
 /* ================= saisie ================= */
@@ -1299,7 +1311,7 @@ renderAll();
 go(S.ui.page==="dash"?"dash":"calc");
 if(S.__migre){
   delete S.__migre; persist();
-  setTimeout(function(){flash("r-saved","Réglages corrigés : plancher 140 R$/h hors coûts directs, 4 jours facturables/semaine");},500);
+  setTimeout(function(){flash("r-saved","Ajustes atualizados: piso de 140 R$/h fora dos custos diretos, 4 dias faturáveis por semana");},500);
 }
 </script>
 <script type="module" src="./js/sync.js"></script>
