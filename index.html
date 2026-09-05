@@ -327,6 +327,7 @@ svg .hit{fill:transparent}
             <div class="field"><label for="i-prazo">Prazo</label><select id="i-prazo">
               <option value="0">Standard</option><option value="r">Rápido</option><option value="u">Urgente</option></select></div>
             <div class="field"><label for="i-seg">Segundo fotógrafo</label><select id="i-seg"><option value="0">Non</option><option value="1">Oui</option></select></div>
+            <div class="field wide"><label for="i-modelo">Modelo em cena<span class="sub">cachê repassé au prix coûtant, il entre dans les coûts directs</span></label><select id="i-modelo"></select></div>
           </div>
         </div>
 
@@ -438,6 +439,12 @@ svg .hit{fill:transparent}
       <div class="card pad">
         <div class="cardhead"><h2>Vídeo et áudio</h2><span>en minutes de travail réel</span></div>
         <div class="grid3" id="p-modules"></div>
+      </div>
+
+      <div class="card pad">
+        <div class="cardhead"><h2>Modelo em cena</h2><span>cachê repassé au prix coûtant, sans marge</span></div>
+        <div id="p-modelo"></div>
+        <p class="note" style="margin-top:12px">Ces montants ne sont pas ta rémunération. Ils entrent dans les coûts directs, comme le segundo fotógrafo, et se retrouvent tels quels dans le prix annoncé. Les heures d’un palier comptent la préparation, les changements de tenue et l’attente, pas seulement le temps devant l’objectif. Le palier uso ampliado couvre site, Booking, anúncios pagos et impressos pendant douze mois : il se négocie avant le tournage.</p>
       </div>
 
       <div class="card pad">
@@ -565,6 +572,11 @@ var DEFAULTS={
     {k:"audioLocal",n:"Áudio — par personne, sur place",min:10},
     {k:"audioEdicao",n:"Áudio — par personne, au montage",min:60}
   ],
+  modelo:[
+    {n:"Cachê mínimo, até 2h",          preco:325,  horas:2, uso:"redes sociais do cliente",                            curto:"modelo em cena, até 2h"},
+    {n:"Diária até 6h, redes sociais",   preco:800,  horas:6, uso:"redes sociais do cliente, 12 meses",                  curto:"modelo em cena, diária até 6h"},
+    {n:"Diária até 6h, uso ampliado",    preco:1600, horas:6, uso:"site, Booking, anúncios pagos e impressos, 12 meses", curto:"modelo em cena, diária e uso ampliado 12 meses"}
+  ],
   niches:[
     {n:"Imóveis",              ov:2.0, mf:3,   mt:.15, prazo:"5 jours ouvrés",     piso:1000, mmin:600, mmax:1400},
     {n:"Evento corporativo",   ov:2.5, mf:2,   mt:.15, prazo:"7 jours",            piso:1200, mmin:1200,mmax:2200},
@@ -580,13 +592,17 @@ var DEFAULTS={
     {n:"Vídeo principal avulso",      preco:1200, min:360, rep:0, mk:"video"},
     {n:"Retratos da equipe (até 10)", preco:450,  min:90,  rep:0},
     {n:"Galeria estendida 12 meses",  preco:200,  min:10,  rep:0},
-    {n:"Segundo fotógrafo",           preco:600,  min:0,   rep:1}
+    {n:"Segundo fotógrafo",           preco:600,  min:0,   rep:1},
+    {n:"Modelo em cena, cachê mínimo até 2h",   preco:325, min:0, rep:1},
+    {n:"Modelo em cena, hora adicional",        preco:125, min:0, rep:1},
+    {n:"Modelo em cena, diária até 6h",         preco:800, min:0, rep:1},
+    {n:"Modelo, acréscimo uso ampliado 12 meses", preco:800, min:0, rep:1}
   ],
   missions:[
     {d:"2026-08-27",cli:"Ãmba — inauguração",niche:"Evento corporativo",valor:900, horas:9.54,st:"pago"},
     {d:"2026-08-31",cli:"Imobiliária — Arpoador",niche:"Imóveis",       valor:1000,horas:6.55,st:"fechado"}
   ],
-  entrada:{niche:1,local:3,trat:50,disp:350,clip:6,reels:0,video:0,pess:0,seg:0,prazo:"0",custos:80,cobrar:0},
+  entrada:{niche:1,local:3,trat:50,disp:350,clip:6,reels:0,video:0,pess:0,seg:0,modelo:"",prazo:"0",custos:80,cobrar:0},
   dash:{periode:12},
   ui:{mois:"",theme:"",page:"calc"}
 };
@@ -612,6 +628,17 @@ function migre(st){
       if(!L[i].mmax)L[i].mmax=2200;
     }
     s.rev=2; st.__migre=1;
+  }
+  if(!(s.rev>=3)){
+    if(!Array.isArray(st.modelo)||!st.modelo.length)st.modelo=clone(DEFAULTS.modelo);
+    var X=st.extras||(st.extras=[]);
+    for(var d=0;d<DEFAULTS.extras.length;d++){
+      var ND=DEFAULTS.extras[d]; if(!/^Modelo/i.test(ND.n))continue;
+      var vu=0; for(var q=0;q<X.length;q++)if(X[q].n===ND.n)vu=1;
+      if(!vu)X.push(clone(ND));
+    }
+    if(st.entrada&&st.entrada.modelo==null)st.entrada.modelo="";
+    s.rev=3; st.__migre=1;
   }
   return st;
 }
@@ -692,6 +719,14 @@ function mod(k){for(var i=0;i<S.modules.length;i++)if(S.modules[i].k===k)return 
 function extraMin(E){return E&&E.mk?mod(E.mk):((E&&E.min)||0);}
 function nomModule(k){for(var i=0;i<S.modules.length;i++)if(S.modules[i].k===k)return S.modules[i].n; return k;}
 
+/* Palier de modele selectionne dans la calculadora. "" = aucune modele en cena. */
+function modeloSel(){
+  var v=S.entrada.modelo;
+  if(v===""||v==null)return null;
+  var i=parseInt(v,10);
+  if(isNaN(i)||i<0||!S.modelo||i>=S.modelo.length)return null;
+  return S.modelo[i];
+}
 function calcule(){
   var e=S.entrada, N=S.niches[Math.min(e.niche,S.niches.length-1)]||S.niches[0];
   var linhas=[
@@ -707,7 +742,8 @@ function calcule(){
   ];
   var horas=0; for(var i=0;i<linhas.length;i++)horas+=linhas[i].hrs;
   var segundo=0; for(var j=0;j<S.extras.length;j++)if(S.extras[j].rep&&/segundo/i.test(S.extras[j].n))segundo=S.extras[j].preco;
-  var diretos=e.custos+(e.seg?segundo:0);
+  var mdl=modeloSel(), modeloVal=mdl?mdl.preco:0;
+  var diretos=e.custos+(e.seg?segundo:0)+modeloVal;
   var mult=1+(e.prazo==="r"?S.express.rapido:(e.prazo==="u"?S.express.urgente:0));
   var hv=horaVenda(), vTrabalho=horas*hv;
   var v02=(diretos+vTrabalho)*mult;
@@ -715,6 +751,7 @@ function calcule(){
   var cobrado=e.cobrar>0?e.cobrar:v02;
   var remun=(cobrado-diretos)*(1-S.socle.marge);
   return {N:N,linhas:linhas,horas:horas,diretos:diretos,mult:mult,hv:hv,vTrabalho:vTrabalho,
+          segundo:segundo,mdl:mdl,modeloVal:modeloVal,
           v01:v01,v02:v02,v03:v03,cobrado:cobrado,remun:remun,
           estrutura:(cobrado-diretos)-remun,
           horaReal:horas?remun/horas:0, horaBruta:horas?cobrado/horas:0,
@@ -743,7 +780,12 @@ function renderCalc(){
        '</td><td class="n">'+h(L.hrs)+'</td><td class="n">'+m(L.hrs*c.hv)+'</td></tr>';}
   t+='<tr class="sum"><td>Total des heures</td><td class="n"></td><td class="n"></td><td class="n">'+h(c.horas)+
      '</td><td class="n">'+m(c.vTrabalho)+'</td></tr>';
-  t+='<tr><td>Coûts directs<span class="sub">sans marge, tu les avances</span></td><td class="n"></td><td class="n"></td><td class="n">—</td><td class="n">'+m(c.diretos)+'</td></tr>';
+  var dd=[];
+  if(e.custos)dd.push("frais "+m(e.custos));
+  if(e.seg&&c.segundo)dd.push("segundo fotógrafo "+m(c.segundo));
+  if(c.modeloVal)dd.push("modelo "+m(c.modeloVal));
+  var dsub=dd.length>1?dd.join(" · "):"sans marge, tu les avances";
+  t+='<tr><td>Coûts directs<span class="sub">'+esc(dsub)+'</span></td><td class="n"></td><td class="n"></td><td class="n">—</td><td class="n">'+m(c.diretos)+'</td></tr>';
   if(c.mult>1)t+='<tr><td>Multiplicateur de prazo</td><td class="n"></td><td class="n"></td><td class="n">—</td><td class="n">×'+nf(c.mult,2)+'</td></tr>';
   t+='<tr class="total"><td>Pacote 02</td><td class="n"></td><td class="n"></td><td class="n"></td><td class="n">'+m(c.v02)+'</td></tr></tbody>';
   document.getElementById("r-decomp").innerHTML=t;
@@ -771,6 +813,7 @@ function renderCalc(){
   if(e.video)L.push(e.video+" vídeo principal");
   if(e.pess) L.push(e.pess+" entrevista"+(e.pess>1?"s":"")+" com áudio");
   if(e.seg)  L.push("segundo fotógrafo");
+  if(c.mdl)  L.push(c.mdl.curto||"modelo em cena");
   L.push("entrega : "+(e.prazo==="r"?"prazo rápido":(e.prazo==="u"?"prazo urgente":c.N.prazo)));
   if(!e.trat&&!e.clip&&!e.reels&&!e.video)L.unshift("aucun livrable saisi");
 
@@ -829,6 +872,13 @@ function renderCalc(){
   if(e.cobrar>0&&e.cobrar<c.v02){var d=c.v02-e.cobrar;
     A.push(["er","Remise","<strong>Tu descends de "+m(d)+"</strong> ("+nf(100*d/c.v02,0)+" %) sous le calcul. Ton heure passe de "+m2(taxa())+" à "+m2(c.horaReal)+". Si tu acceptes, enlève des livrables."]);}
   else if(e.cobrar>c.v02)A.push(["ok","Marge","Tu annonces "+m(e.cobrar-c.v02)+" de plus que le calcul. Ton heure monte à "+m2(c.horaReal)+"."]);
+  if(c.mdl){
+    var mh=c.mdl.horas||0, okh=!mh||e.local<=mh;
+    A.push([okh?"ok":"av","Modelo",
+      "Palier <strong>"+esc(c.mdl.n)+"</strong> à "+m(c.mdl.preco)+", repassé au prix coûtant dans les coûts directs. "+
+      (okh?("Usage couvert : "+esc(c.mdl.uso)+". À écrire dans le combinado avant le tournage, jamais après.")
+          :("La cobertura saisie est de "+nf(e.local,e.local%1?1:0)+"h alors que ce palier couvre "+nf(mh,mh%1?1:0)+"h de présence. Passe au palier au-dessus ou ajoute des heures en extra, sinon le cachê est sous-évalué."))]);
+  }
   if(c.N.mmax&&c.v02>c.N.mmax)A.push(["av","Marché","Le calcul ("+m(c.v02)+") dépasse le haut du marché de cette niche ("+m(c.N.mmax)+"). Réduis la livraison plutôt que le prix."]);
   else if(c.N.mmin&&c.v02<c.N.mmin)A.push(["av","Marché","Le calcul est sous le plancher marché de la niche ("+m(c.N.mmin)+"). Tu peux monter sans risque."]);
   document.getElementById("r-alerts").innerHTML=als(A);
@@ -1077,6 +1127,20 @@ function renderPar(){
         '<input type="number" step="5" value="'+S.modules[k].min+'" oninput="setM('+k+',+this.value)"></div>';
   document.getElementById("p-modules").innerHTML=mh;
 
+  var md="";
+  for(var z=0;z<S.modelo.length;z++){var MD=S.modelo[z];
+    md+='<div class="nicheblk"><div class="nichehd">'+
+       '<input type="text" value="'+esc(MD.n)+'" oninput="setMd('+z+',\'n\',this.value)" aria-label="Nom du palier">'+
+       '<button class="btn ghost sm" style="margin-left:auto" onclick="delMd('+z+')">Supprimer</button>'+
+       '</div><div class="ngrid">'+
+       '<label>Cachê R$<i>ce que la modèle reçoit, repassé tel quel</i><input type="number" step="25" min="0" value="'+MD.preco+'" oninput="setMd('+z+',\'preco\',+this.value)"></label>'+
+       '<label>Heures couvertes<i>préparation, changements et attente compris</i><input type="number" step="0.5" min="0" value="'+MD.horas+'" oninput="setMd('+z+',\'horas\',+this.value)"></label>'+
+       '<label>Usage des images<i>ce que le client a le droit d\'en faire</i><input type="text" value="'+esc(MD.uso)+'" oninput="setMd('+z+',\'uso\',this.value)"></label>'+
+       '<label>Ligne du pacote<i>comme elle apparaît dans la proposta</i><input type="text" value="'+esc(MD.curto)+'" oninput="setMd('+z+',\'curto\',this.value)"></label>'+
+       '</div></div>';}
+  md+='<button class="btn ghost sm" onclick="addMd()">+ Ajouter un palier</button>';
+  document.getElementById("p-modelo").innerHTML=md;
+
   var hv=horaVenda();
   var ex='<thead><tr><th>Extra</th><th class="n">Minutes de travail<i>ce que ça te prend</i></th>'+
     '<th class="n">Ce que ça te coûte<i>calculé</i></th><th class="n">Ce que tu factures<i>à toi de fixer</i></th>'+
@@ -1136,6 +1200,9 @@ function setN(i,k,v){
 function delN(i){if(S.niches.length<2)return; S.niches.splice(i,1); if(S.entrada.niche>=S.niches.length)S.entrada.niche=0; renderAll();}
 function addNiche(){S.niches.push({n:"Nouvelle niche",ov:2,mf:2,mt:.15,prazo:"7 jours",piso:0,mmin:0,mmax:0}); renderAll();}
 function setM(i,v){S.modules[i].min=v; refresh();}
+function setMd(i,k,v){S.modelo[i][k]=v; refresh();}
+function delMd(i){S.modelo.splice(i,1); if(S.entrada.modelo!==""&&+S.entrada.modelo>=S.modelo.length)S.entrada.modelo=""; renderAll();}
+function addMd(){S.modelo.push({n:"Nouveau palier",preco:400,horas:2,uso:"redes sociais do cliente",curto:"modelo em cena"}); renderAll();}
 function setE(i,k,v){S.extras[i][k]=v; refresh();}
 function delE(i){S.extras.splice(i,1); renderAll();}
 function addExtra(){S.extras.push({n:"Nouvel extra",preco:100,min:30,rep:0}); renderAll();}
@@ -1165,6 +1232,14 @@ function bindForm(){
            "i-video":"video","i-pess":"pess","i-custos":"custos","i-cobrar":"cobrar"};
   for(var id in map)if(Object.prototype.hasOwnProperty.call(map,id))set(id,S.entrada[map[id]]);
   set("i-seg",S.entrada.seg?"1":"0");
+  var msel=document.getElementById("i-modelo");
+  if(msel&&document.activeElement!==msel){
+    var mo='<option value="">Non</option>';
+    for(var z=0;z<S.modelo.length;z++)
+      mo+='<option value="'+z+'">'+esc(S.modelo[z].n)+" · "+esc(m(S.modelo[z].preco))+'</option>';
+    msel.innerHTML=mo;
+    msel.value=(S.entrada.modelo==null?"":String(S.entrada.modelo));
+  }
   set("i-prazo",S.entrada.prazo);
 }
 function readForm(){
@@ -1173,6 +1248,7 @@ function readForm(){
   e.local=num("i-local"); e.trat=num("i-trat"); e.disp=num("i-disp");
   e.clip=num("i-clip"); e.reels=num("i-reels"); e.video=num("i-video");
   e.pess=num("i-pess"); e.seg=num("i-seg")?1:0;
+  var mel=document.getElementById("i-modelo"); e.modelo=mel?mel.value:"";
   e.custos=num("i-custos"); e.cobrar=num("i-cobrar");
   e.prazo=document.getElementById("i-prazo").value;
 }
@@ -1208,7 +1284,7 @@ document.addEventListener("input",function(ev){
 });
 document.addEventListener("change",function(ev){
   var t=ev.target; if(!t||!t.id)return;
-  if(t.id==="i-niche"||t.id==="i-prazo"||t.id==="i-seg"||t.id==="p-auto"||t.id==="q-per")refresh();
+  if(t.id==="i-niche"||t.id==="i-prazo"||t.id==="i-seg"||t.id==="i-modelo"||t.id==="p-auto"||t.id==="q-per")refresh();
   if(t.id==="d-mois"){S.ui.mois=t.value; persist(); renderDash();}
 });
 var tR=null;
