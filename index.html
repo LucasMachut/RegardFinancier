@@ -202,6 +202,52 @@ tr.total td:first-child{font-size:14px}
 select.st{font-weight:600; font-size:12.5px}
 select.st.pago{color:var(--ok)} select.st.fechado{color:var(--acc-ink)} select.st.proposto{color:var(--wa)}
 
+
+/* ---------- permuta : formatos et balanca ---------- */
+.fmts{display:flex; gap:9px; flex-wrap:wrap}
+.fmt{
+  flex:1 1 150px; text-align:left; cursor:pointer; padding:11px 13px; border-radius:13px;
+  border:1px solid var(--line); background:var(--card-2); color:var(--tx-2); font:inherit;
+}
+.fmt:hover{border-color:var(--line-2)}
+.fmt[aria-current="true"]{border-color:var(--acc); background:var(--acc-soft); color:var(--tx)}
+.fmt b{display:block; font:600 13.5px Inter; color:var(--tx)}
+.fmt i{display:block; font-style:normal; font-size:11.5px; color:var(--tx-3); margin-top:2px}
+.balanca{position:sticky; top:70px; z-index:20}
+.bal2{display:grid; grid-template-columns:1fr auto 1fr; gap:18px; align-items:end; margin-bottom:16px}
+.bal2 .side span{display:block; font:700 9.5px Inter; text-transform:uppercase; letter-spacing:.12em; color:var(--tx-3)}
+.bal2 .side b{display:block; font:700 26px "Space Grotesk",sans-serif; font-variant-numeric:tabular-nums; letter-spacing:-.02em; margin-top:3px}
+.bal2 .side small{display:block; font-size:11.5px; color:var(--tx-3); margin-top:2px; line-height:1.35}
+.bal2 .right{text-align:right}
+.bal2 .vs{font:700 10px Inter; text-transform:uppercase; letter-spacing:.14em; color:var(--tx-3); padding-bottom:9px}
+.gauge{position:relative; height:30px; border-radius:10px; background:var(--card-3); display:flex; margin:40px 0 12px}
+.gauge .sg{height:100%; min-width:0; transition:width .18s ease}
+.gauge .sg:first-child{border-radius:10px 0 0 10px}
+.gauge .sg.fim{border-radius:0 10px 10px 0}
+.gauge .tetomark.fim em{left:auto; right:6px; transform:none}
+.gauge .tetomark{position:absolute; top:-9px; bottom:-9px; width:2px; background:var(--tx); border-radius:2px}
+.gauge .tetomark em{
+  position:absolute; left:50%; transform:translateX(-50%); bottom:calc(100% + 4px); white-space:nowrap;
+  font:700 9.5px Inter; font-style:normal; text-transform:uppercase; letter-spacing:.1em; color:var(--tx);
+}
+.gauge.over .tetomark{background:var(--er)} .gauge.over .tetomark em{color:var(--er)}
+.leg{display:flex; gap:15px; flex-wrap:wrap; font-size:11.8px; color:var(--tx-2)}
+.leg span{display:flex; align-items:center; gap:6px}
+.leg i{width:9px; height:9px; border-radius:3px; flex:none}
+.escada{display:flex; flex-direction:column; gap:2px}
+.deg{display:flex; align-items:baseline; gap:12px; padding:11px 0; border-bottom:1px solid var(--line)}
+.deg:last-child{border-bottom:0}
+.deg .lb{flex:1; min-width:0}
+.deg .lb b{display:block; font:600 13.5px Inter; color:var(--tx)}
+.deg .lb i{display:block; font-style:normal; font-size:11.8px; color:var(--tx-3); margin-top:2px; line-height:1.4}
+.deg .vl{flex:none; font:600 16px "Space Grotesk",sans-serif; font-variant-numeric:tabular-nums; color:var(--tx)}
+.deg.fim{border-top:1px solid var(--line-2); margin-top:5px}
+.deg.fim .lb b{font-size:14.5px} .deg.fim .vl{font-size:21px; color:var(--acc-ink)}
+@media (max-width:780px){
+  .bal2{grid-template-columns:1fr 1fr; gap:12px} .bal2 .vs{display:none}
+  .balanca{position:static}
+}
+
 /* ---------- pacotes ---------- */
 .pacotes{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
 .pac{border:1px solid var(--line); border-radius:15px; padding:17px; background:var(--card-2); display:flex; flex-direction:column}
@@ -407,17 +453,46 @@ svg .hit{fill:transparent}
 
   <!-- ---- onglet permuta ---- -->
   <div id="pane-calc-permuta" hidden>
-    <div class="calc-grid" style="display:grid; grid-template-columns:minmax(0,1fr) 396px; gap:20px; align-items:start">
+
+    <div class="card pad" style="margin-bottom:16px">
+      <div class="cardhead"><h2>O formato</h2><span>escolhido pelas diárias, muda sozinho se o número de diárias mudar</span></div>
+      <div class="fmts" id="b-formatos"></div>
+      <p class="note" style="margin-top:11px" id="b-formato-nota"></p>
+    </div>
+
+    <div class="card pad balanca">
+      <div class="bal2">
+        <div class="side">
+          <span>Você recebe</span>
+          <b class="num" id="b-recebe">—</b>
+          <small id="b-recebe-s"></small>
+        </div>
+        <div class="vs">contra</div>
+        <div class="side right">
+          <span>Você entrega</span>
+          <b class="num" id="b-entrega">—</b>
+          <small id="b-entrega-s"></small>
+        </div>
+      </div>
+      <div class="gauge" id="b-gauge"></div>
+      <div class="leg" id="b-leg"></div>
+      <p class="note" style="margin-top:12px" id="b-veredito"></p>
+    </div>
+
+    <div class="calc-grid" style="display:grid; grid-template-columns:minmax(0,1fr) 396px; gap:20px; align-items:start; margin-top:20px">
 
       <div class="stack">
         <div class="card pad">
           <div class="cardhead"><h2>O que você recebe</h2><span>a hospedagem, a preço de tabela dela</span></div>
           <div class="grid2">
-            <div class="field"><label for="b-diaria">Diária de tabela R$<span class="sub">o preço anunciado, não o custo real deles</span></label><input type="number" id="b-diaria" step="50" min="0"></div>
+            <div class="field"><label for="b-diaria">Diária de tabela do quarto R$<span class="sub">o preço do quarto, não por pessoa</span></label><input type="number" id="b-diaria" step="50" min="0"></div>
             <div class="field"><label for="b-diarias">Número de diárias</label><input type="number" id="b-diarias" step="1" min="0"></div>
-            <div class="field"><label for="b-modelohosp">Hospedagem da modelo incluída<span class="sub">entra no combinado desde a primeira mensagem</span></label><select id="b-modelohosp"><option value="0">Não</option><option value="1">Sim</option></select></div>
+            <div class="field wide"><label for="b-modelo">Modelo em cena na viagem<span class="sub">dois no mesmo quarto não dobram o valor recebido: a diária é do quarto</span></label><select id="b-modelo">
+              <option value="0">Não, viajo sozinho</option>
+              <option value="1">Sim, no mesmo quarto</option>
+              <option value="2">Sim, com quarto separado</option></select></div>
             <div class="field"><label for="b-refeicoes">Refeições incluídas R$<span class="sub">a preço de cardápio, no total da estadia</span></label><input type="number" id="b-refeicoes" step="50" min="0"></div>
-            <div class="field wide"><label for="b-contra">Contrapartidas escritas no combinado<span class="sub">marcação, menção, duas indicações, depoimento. Sem elas o teto cai</span></label><select id="b-contra"><option value="1">Sim, escritas</option><option value="0">Não</option></select></div>
+            <div class="field"><label for="b-contra">Contrapartidas escritas<span class="sub">marcação, menção, duas indicações, depoimento</span></label><select id="b-contra"><option value="1">Sim, escritas</option><option value="0">Não</option></select></div>
           </div>
         </div>
 
@@ -452,28 +527,15 @@ svg .hit{fill:transparent}
       </div>
 
       <aside class="stack sticky" style="position:sticky; top:88px">
-        <div class="hero">
-          <span class="eyebrow">Teto de entrega</span>
-          <span class="big num" id="b-teto">—</span>
-          <span class="cap" id="b-teto-s"></span>
-          <div class="rates">
-            <div class="rate"><span>Valor da entrega</span><b class="num" id="b-entrega">—</b><small id="b-entrega-s"></small></div>
-            <div class="rate"><span>Horas doadas</span><b class="num" id="b-horas">—</b><small id="b-horas-s"></small></div>
-            <div class="rate"><span>Diárias pela luz</span><b class="num" id="b-luz">—</b><small id="b-luz-s"></small></div>
-          </div>
-        </div>
         <div class="stack-s" id="b-alerts"></div>
-        <div class="card pad">
-          <div class="cardhead"><h2>Formatos</h2><span>preencher com um clique</span></div>
-          <div class="row" id="b-formatos"></div>
-        </div>
       </aside>
     </div>
 
     <div class="stack" style="margin-top:20px">
       <div class="card pad">
-        <div class="cardhead"><h2>De onde vem o teto</h2><span>o que se recebe, e o que dá para devolver</span></div>
-        <div class="tw"><table id="b-origem"></table></div>
+        <div class="cardhead"><h2>Como se chega ao teto</h2><span>o caminho inteiro, passo a passo</span></div>
+        <div class="escada" id="b-escada"></div>
+        <p class="note" style="margin-top:16px">Um quarto vago custa à hospedagem entre 15 e 30 % do preço de tabela dela. Uma hora sua custa a você metade do que você cobra por ela. Devolvendo 100 % do valor recebido você pagaria cerca de três vezes mais caro que o lugar. O teto corrige parte disso. O equilíbrio real entre custos reais fica em 50 %, e os pontos acima são o preço das contrapartidas: sem elas escritas, o teto volta para 50 %.</p>
       </div>
 
       <div class="card pad">
@@ -718,12 +780,12 @@ var DEFAULTS={
     pos:{mt:.15,mf:3,lote:1.5,tomada:6},
     prazo:{padrao:"30 dias úteis",comFilme:"45 dias úteis",previaFotos:5,previaPrazo:"7 dias úteis"},
     formatos:[
-      {n:"Curta", rec:"R$ 1.000 a 2.000", doc:3, enc:0, lote:20, edit:6,  disp:200, tomadas:0,  clip:4, reels:0, video:0},
-      {n:"Padrão",rec:"R$ 2.500 a 4.000", doc:4, enc:1, lote:30, edit:10, disp:350, tomadas:12, clip:0, reels:1, video:0},
-      {n:"Longa", rec:"acima de R$ 6.000",doc:7, enc:3, lote:40, edit:15, disp:700, tomadas:12, clip:0, reels:2, video:1}
+      {n:"Curta", dmin:0, dmax:3, doc:2, enc:0, lote:15, edit:5,  disp:150, tomadas:0,  clip:2, reels:0, video:0},
+      {n:"Padrão",dmin:4, dmax:5, doc:3, enc:1, lote:25, edit:8,  disp:300, tomadas:6,  clip:0, reels:1, video:0},
+      {n:"Longa", dmin:6, dmax:0, doc:5, enc:2, lote:30, edit:10, disp:450, tomadas:8,  clip:0, reels:1, video:1}
     ],
-    entrada:{diaria:700,diarias:4,modeloHosp:1,refeicoes:0,contra:1,custos:0,cachet:0,
-             doc:4,enc:1,lote:30,edit:10,disp:350,tomadas:12,clip:0,reels:1,video:0}
+    entrada:{diaria:700,diarias:4,modelo:1,refeicoes:0,contra:1,custos:0,cachet:0,formato:1,
+             doc:3,enc:1,lote:25,edit:8,disp:300,tomadas:6,clip:0,reels:1,video:0}
   },
   missions:[
     {d:"2026-08-27",cli:"Ãmba, inauguração",niche:"Evento corporativo",valor:900, horas:9.54,st:"pago"},
@@ -790,6 +852,20 @@ function migre(st){
     if(!Array.isArray(PB.formatos)||!PB.formatos.length)PB.formatos=clone(PD.formatos);
     if(!PB.entrada)PB.entrada=clone(PD.entrada);
     s.rev=5; st.__migre=1;
+  }
+  /* La diaria est celle de la chambre : deux personnes dans la meme chambre ne doublent rien. */
+  if(!(s.rev>=6)){
+    var PB2=st.permuta||(st.permuta=clone(DEFAULTS.permuta)), E2=PB2.entrada||(PB2.entrada=clone(DEFAULTS.permuta.entrada));
+    if(E2.modelo==null)E2.modelo=E2.modeloHosp?2:0;
+    delete E2.modeloHosp;
+    if(E2.formato==null)E2.formato=1;
+    var FD=DEFAULTS.permuta.formatos, FB=PB2.formatos||(PB2.formatos=clone(FD));
+    for(var fi=0;fi<FB.length;fi++){
+      if(FB[fi].dmin==null)FB[fi].dmin=FD[fi]?FD[fi].dmin:0;
+      if(FB[fi].dmax==null)FB[fi].dmax=FD[fi]?FD[fi].dmax:0;
+      if(FB[fi].rec!=null)delete FB[fi].rec;
+    }
+    s.rev=6; st.__migre=1;
   }
   return st;
 }
@@ -1041,96 +1117,160 @@ function renderCalc(){
 function als(A){var o=""; for(var i=0;i<A.length;i++)o+='<div class="al '+A[i][0]+'"><span class="k">'+A[i][1]+'</span><span>'+A[i][2]+'</span></div>'; return o;}
 
 /* ================= permuta ================= */
+var PKEYS=["doc","enc","lote","edit","disp","tomadas","clip","reels","video"];
+
 function permutaCalc(){
   var P=S.permuta, e=P.entrada, hv=horaVenda(), i;
-  var pessoas=1+(e.modeloHosp?1:0);
-  var hosp=(e.diaria||0)*(e.diarias||0)*pessoas;
+  var quartos=(e.modelo==2?2:1);
+  var hosp=(e.diaria||0)*(e.diarias||0)*quartos;
   var V=hosp+(e.refeicoes||0);
   var pct=e.contra?P.teto.com:P.teto.sem;
   var teto=V*pct;
-  var caixa=(e.custos||0)+(e.cachet||0);
-  var tetoLiq=teto-caixa;
-  var horasDoadas=hv?tetoLiq/hv:0;
+  var bolso=(e.custos||0)+(e.cachet||0);
+  var podeEntregar=teto-bolso;
+  var horasDoadas=hv?podeEntregar/hv:0;
 
-  var cap=[
-    {n:"Horas fixas",s:"importação, backup, seleção final, galeria, entrega",q:1,u:nf(P.cap.fixas,1)+" h",hrs:P.cap.fixas},
-    {n:"Conceitos documentais",s:"espaço, detalhe, arquitetura, sem direção",q:e.doc,u:P.cap.doc+" min",hrs:e.doc*P.cap.doc/60},
-    {n:"Conceitos encenados",s:"presença, direção, repetição, espera da luz",q:e.enc,u:P.cap.enc+" min",hrs:e.enc*P.cap.enc/60}
+  var capt=[
+    {n:"Horas fixas",s:"importação, backup, seleção final, galeria, entrega",q:1,u:nf(P.cap.fixas,1)+" h",hrs:P.cap.fixas,g:0},
+    {n:"Conceitos documentais",s:"espaço, detalhe, arquitetura, sem direção",q:e.doc,u:P.cap.doc+" min",hrs:(e.doc||0)*P.cap.doc/60,g:0},
+    {n:"Conceitos encenados",s:"presença, direção, repetição, espera da luz",q:e.enc,u:P.cap.enc+" min",hrs:(e.enc||0)*P.cap.enc/60,g:0}
   ];
   var pos=[
-    {n:"Seleção das fotos",q:e.disp,u:nf(P.pos.mt,2)+" min/foto",hrs:e.disp*P.pos.mt/60},
-    {n:"Fotos com tratamento de lote",q:e.lote,u:nf(P.pos.lote,1)+" min/foto",hrs:e.lote*P.pos.lote/60},
-    {n:"Fotos editadas uma a uma",q:e.edit,u:nf(P.pos.mf,1)+" min/foto",hrs:e.edit*P.pos.mf/60},
-    {n:"Tomadas tratadas",s:"cor aplicada em lote, sem montagem",q:e.tomadas,u:P.pos.tomada+" min",hrs:e.tomadas*P.pos.tomada/60},
-    {n:"Clipes tratados ≤20s",q:e.clip,u:mod("clipe")+" min",hrs:e.clip*mod("clipe")/60},
-    {n:"Reels montados",s:"vertical 9:16",q:e.reels,u:mod("reels")+" min",hrs:e.reels*mod("reels")/60},
-    {n:"Filme principal",s:"horizontal 16:9",q:e.video,u:mod("video")+" min",hrs:e.video*mod("video")/60}
+    {n:"Seleção das fotos",q:e.disp,u:nf(P.pos.mt,2)+" min/foto",hrs:(e.disp||0)*P.pos.mt/60,g:1},
+    {n:"Fotos com tratamento de lote",q:e.lote,u:nf(P.pos.lote,1)+" min/foto",hrs:(e.lote||0)*P.pos.lote/60,g:1},
+    {n:"Fotos editadas uma a uma",q:e.edit,u:nf(P.pos.mf,1)+" min/foto",hrs:(e.edit||0)*P.pos.mf/60,g:1},
+    {n:"Tomadas tratadas",s:"cor aplicada em lote, sem montagem",q:e.tomadas,u:P.pos.tomada+" min",hrs:(e.tomadas||0)*P.pos.tomada/60,g:3},
+    {n:"Clipes tratados ≤20s",q:e.clip,u:mod("clipe")+" min",hrs:(e.clip||0)*mod("clipe")/60,g:2},
+    {n:"Reels montados",s:"vertical 9:16",q:e.reels,u:mod("reels")+" min",hrs:(e.reels||0)*mod("reels")/60,g:2},
+    {n:"Filme principal",s:"horizontal 16:9",q:e.video,u:mod("video")+" min",hrs:(e.video||0)*mod("video")/60,g:2}
   ];
-  var hCap=0,hPos=0;
-  for(i=0;i<cap.length;i++)hCap+=cap[i].hrs;
-  for(i=0;i<pos.length;i++)hPos+=pos[i].hrs;
+  var hCap=0,hPos=0,grp=[0,0,0,0];
+  for(i=0;i<capt.length;i++){hCap+=capt[i].hrs; grp[capt[i].g]+=capt[i].hrs;}
+  for(i=0;i<pos.length;i++){hPos+=pos[i].hrs; grp[pos[i].g]+=pos[i].hrs;}
   var horas=hCap+hPos, entrega=horas*hv;
   var janelas=(P.cap.docJanela?(e.doc||0)/P.cap.docJanela:0)+(P.cap.encJanela?(e.enc||0)/P.cap.encJanela:0);
   var diariasLuz=janelas?Math.ceil(janelas/(P.cap.janelasDia||1))+(P.cap.margem||0):0;
   var prazo=e.video>0?P.prazo.comFilme:P.prazo.padrao;
-  return {P:P,e:e,hv:hv,pessoas:pessoas,hosp:hosp,V:V,pct:pct,teto:teto,caixa:caixa,tetoLiq:tetoLiq,
-    horasDoadas:horasDoadas,cap:cap,pos:pos,hCap:hCap,hPos:hPos,horas:horas,entrega:entrega,
-    janelas:janelas,diariasLuz:diariasLuz,prazo:prazo,folga:tetoLiq-entrega,ratio:hCap?hPos/hCap:0};
+  return {P:P,e:e,hv:hv,quartos:quartos,hosp:hosp,V:V,pct:pct,teto:teto,bolso:bolso,
+    podeEntregar:podeEntregar,horasDoadas:horasDoadas,capt:capt,pos:pos,grp:grp,
+    hCap:hCap,hPos:hPos,horas:horas,entrega:entrega,janelas:janelas,diariasLuz:diariasLuz,
+    prazo:prazo,folga:podeEntregar-entrega,ratio:hCap?hPos/hCap:0};
+}
+
+/* Le format actif est celui dont la fourchette de diarias contient la valeur saisie. */
+function formatoDeDiarias(d){
+  var F=S.permuta.formatos;
+  for(var i=0;i<F.length;i++)if(d>=(F[i].dmin||0)&&(!F[i].dmax||d<=F[i].dmax))return i;
+  return F.length-1;
+}
+function setFormato(i){
+  var F=S.permuta.formatos[i]; if(!F)return;
+  var e=S.permuta.entrada;
+  for(var k=0;k<PKEYS.length;k++)e[PKEYS[k]]=F[PKEYS[k]]||0;
+  e.formato=i;
+}
+function formatoIntacto(){
+  var e=S.permuta.entrada, F=S.permuta.formatos[e.formato];
+  if(!F)return false;
+  for(var k=0;k<PKEYS.length;k++)if((e[PKEYS[k]]||0)!==(F[PKEYS[k]]||0))return false;
+  return true;
+}
+function aplicarFormato(i){
+  setFormato(i); renderPermuta(); persist();
+  flash("b-saved","Formato "+S.permuta.formatos[i].n+" aplicado");
 }
 
 function renderPermuta(){
-  if(!document.getElementById("b-teto"))return;
+  if(!document.getElementById("b-gauge"))return;
   bindPermuta();
-  var c=permutaCalc(), e=c.e, P=c.P;
+  var c=permutaCalc(), e=c.e, P=c.P, i;
 
-  document.getElementById("b-teto").textContent=m(c.tetoLiq);
-  document.getElementById("b-teto-s").textContent=
-    nf(c.pct*100,0)+" % de "+m(c.V)+" recebidos"+(c.caixa?", menos "+m(c.caixa)+" que sai do seu bolso":"");
-  document.getElementById("b-entrega").textContent=m(c.entrega);
-  document.getElementById("b-entrega-s").textContent=c.folga>=0
-    ? "sobra "+m(c.folga)+" de margem" : "passa "+m(-c.folga)+" do teto";
-  document.getElementById("b-horas").textContent=h(c.horas);
-  document.getElementById("b-horas-s").textContent=h(c.hCap)+" de captação, "+h(c.hPos)+" de pós";
-  document.getElementById("b-luz").textContent=c.diariasLuz?nf(c.diariasLuz,0):"—";
-  document.getElementById("b-luz-s").textContent=nf(c.janelas,1)+" janelas de luz necessárias";
-
-  var fb="";
-  for(var f=0;f<P.formatos.length;f++)
-    fb+='<button class="btn ghost sm" onclick="aplicarFormato('+f+')" title="'+esc(P.formatos[f].rec)+'">'+esc(P.formatos[f].n)+'</button>';
+  /* ---- formatos ---- */
+  var fb="", intacto=formatoIntacto();
+  for(i=0;i<P.formatos.length;i++){var F=P.formatos[i];
+    var faixa=F.dmax?(F.dmin+" a "+F.dmax+" diárias"):("a partir de "+F.dmin+" diárias");
+    fb+='<button class="fmt" aria-current="'+(i===e.formato?"true":"false")+'" onclick="aplicarFormato('+i+')">'+
+        '<b>'+esc(F.n)+'</b><i>'+esc(faixa)+'</i></button>';}
   document.getElementById("b-formatos").innerHTML=fb;
+  document.getElementById("b-formato-nota").textContent = intacto
+    ? "Formato "+P.formatos[e.formato].n+" tal como está nos parâmetros. Mude o número de diárias e o formato troca sozinho."
+    : "Formato "+P.formatos[e.formato].n+", ajustado à mão. Clique de novo no formato para voltar aos valores de origem.";
 
-  var o='<thead><tr><th>Item</th><th class="n">Qtd</th><th class="n">Unidade</th><th class="n">R$</th></tr></thead><tbody>';
-  o+='<tr><td>Diárias recebidas<span class="sub">'+(c.pessoas>1?"duas pessoas hospedadas":"uma pessoa hospedada")+'</span></td><td class="n">'+nf(e.diarias)+'</td><td class="n">'+m(e.diaria)+' × '+c.pessoas+'</td><td class="n">'+m(c.hosp)+'</td></tr>';
-  o+='<tr'+(e.refeicoes?'':' class="z"')+'><td>Refeições incluídas<span class="sub">a preço de cardápio</span></td><td class="n">—</td><td class="n">—</td><td class="n">'+m(e.refeicoes)+'</td></tr>';
-  o+='<tr class="sum"><td>Valor de tabela recebido</td><td class="n"></td><td class="n"></td><td class="n">'+m(c.V)+'</td></tr>';
-  o+='<tr><td>Teto de entrega<span class="sub">'+(e.contra?"contrapartidas escritas no combinado":"sem contrapartidas escritas")+'</span></td><td class="n"></td><td class="n">'+nf(c.pct*100,0)+' %</td><td class="n">'+m(c.teto)+'</td></tr>';
-  o+='<tr'+(c.caixa?'':' class="z"')+'><td>Dinheiro que sai do seu bolso<span class="sub">custos diretos e cachê da modelo</span></td><td class="n"></td><td class="n">—</td><td class="n">− '+m(c.caixa)+'</td></tr>';
-  o+='<tr class="total"><td>Teto líquido<span class="sub">é este número que a entrega não pode passar</span></td><td class="n"></td><td class="n">'+h(c.horasDoadas)+'</td><td class="n">'+m(c.tetoLiq)+'</td></tr></tbody>';
-  document.getElementById("b-origem").innerHTML=o;
+  /* ---- balanca ---- */
+  document.getElementById("b-recebe").textContent=m(c.V);
+  document.getElementById("b-recebe-s").textContent=
+    nf(e.diarias,0)+" diária"+(e.diarias>1?"s":"")+" × "+m(e.diaria)+
+    (c.quartos>1?" × 2 quartos":" (um quarto, uma ou duas pessoas)")+
+    (e.refeicoes?", mais "+m(e.refeicoes)+" de refeições":"");
+  document.getElementById("b-entrega").textContent=m(c.entrega);
+  document.getElementById("b-entrega-s").textContent=h(c.horas)+" de trabalho, valor de tabela";
 
+  var over=c.entrega>c.podeEntregar;
+  var escala=Math.max(c.podeEntregar,c.entrega,1)*1.05;
+  var CORES=["var(--acc)","var(--ok)","var(--wa)","var(--acc-2)"];
+  var NOMES=["Captação","Fotos","Vídeo montado","Tomadas tratadas"];
+  var g="", segs=[];
+  for(i=0;i<4;i++){var w=100*c.grp[i]*c.hv/escala; if(w>0)segs.push([i,w]);}
+  for(i=0;i<segs.length;i++)
+    g+='<div class="sg'+(i===segs.length-1?' fim':'')+'" style="width:'+segs[i][1].toFixed(2)+'%; background:'+CORES[segs[i][0]]+
+       '" title="'+esc(NOMES[segs[i][0]])+' '+esc(m(c.grp[segs[i][0]]*c.hv))+'"></div>';
+  var xt=100*c.podeEntregar/escala;
+  g+='<div class="tetomark'+(xt>82?" fim":"")+'" style="left:'+xt.toFixed(2)+'%"><em>teto '+esc(m(c.podeEntregar))+'</em></div>';
+  var gz=document.getElementById("b-gauge");
+  gz.className="gauge"+(over?" over":""); gz.innerHTML=g;
+
+  var lg="";
+  for(i=0;i<4;i++)if(c.grp[i]>0)
+    lg+='<span><i style="background:'+CORES[i]+'"></i>'+esc(NOMES[i])+' '+esc(m(c.grp[i]*c.hv))+' · '+h(c.grp[i])+'</span>';
+  document.getElementById("b-leg").innerHTML=lg;
+
+  document.getElementById("b-veredito").innerHTML = c.podeEntregar<=0
+    ? "<strong>Não sobra nada para entregar.</strong> O que sai do seu bolso já consome o teto inteiro. Peça um cachê ou recuse."
+    : (over
+      ? "<strong>Você passa "+esc(m(c.entrega-c.podeEntregar))+" do teto</strong>, ou "+h((c.entrega-c.podeEntregar)/c.hv)+" de trabalho a mais do que esta hospedagem paga. Tire entregáveis, não estique a estadia."
+      : "Sobram <strong>"+esc(m(c.folga))+"</strong>, ou "+h(c.folga/c.hv)+" de trabalho, antes de chegar ao teto.");
+
+  /* ---- escada ---- */
+  var E=[];
+  E.push(['<b>Valor de tabela recebido</b><i>'+nf(e.diarias,0)+' diária'+(e.diarias>1?'s':'')+' × '+m(e.diaria)+
+    (c.quartos>1?' × 2 quartos':'')+(e.refeicoes?', mais '+m(e.refeicoes)+' de refeições a preço de cardápio':'')+
+    '. A diária é a do quarto: dois no mesmo quarto não mudam este número.</i>', m(c.V), ""]);
+  E.push(['<b>Teto de entrega, '+nf(c.pct*100,0)+' %</b><i>'+
+    (e.contra?'70 % porque as quatro contrapartidas estão escritas no combinado.':'50 % porque as contrapartidas não estão escritas. Escreva-as e o teto sobe para '+nf(P.teto.com*100,0)+' %.')+
+    '</i>', m(c.teto), ""]);
+  E.push(['<b>Menos o que sai do seu bolso</b><i>'+
+    (c.bolso?('custos diretos '+m(e.custos)+', cachê da modelo '+m(e.cachet)+'. Dinheiro de verdade, que a hospedagem não devolve.')
+            :'nada por enquanto: nenhum custo direto, nenhum cachê a pagar.')+
+    '</i>', (c.bolso?"− "+m(c.bolso):m(0)), ""]);
+  E.push(['<b>O que você pode entregar</b><i>é o teto da balança acima, e são '+h(c.horasDoadas)+' do seu tempo a '+m2(c.hv)+' a hora. Tudo o que passar disso você está doando.</i>',
+    m(c.podeEntregar), "fim"]);
+  var es="";
+  for(i=0;i<E.length;i++)es+='<div class="deg '+E[i][2]+'"><div class="lb">'+E[i][0]+'</div><div class="vl">'+esc(E[i][1])+'</div></div>';
+  document.getElementById("b-escada").innerHTML=es;
+
+  /* ---- tableau detaille ---- */
   var t='<thead><tr><th>Item</th><th class="n">Qtd</th><th class="n">Unidade</th><th class="n">Horas</th><th class="n">R$</th></tr></thead><tbody>';
   var bloc=function(titre,arr,tot){
-    var r='<tr class="sum"><td>'+titre+'</td><td class="n"></td><td class="n"></td><td class="n">'+h(tot)+'</td><td class="n">'+m(tot*c.hv)+'</td></tr>';
     var q="";
-    for(var i=0;i<arr.length;i++){var L=arr[i];
+    for(var i2=0;i2<arr.length;i2++){var L=arr[i2];
       q+='<tr'+(L.hrs?'':' class="z"')+'><td>'+esc(L.n)+(L.s?'<span class="sub">'+esc(L.s)+'</span>':'')+
         '</td><td class="n">'+nf(L.q,L.q%1?1:0)+'</td><td class="n">'+esc(L.u)+
         '</td><td class="n">'+h(L.hrs)+'</td><td class="n">'+m(L.hrs*c.hv)+'</td></tr>';}
-    return q+r;
+    return q+'<tr class="sum"><td>'+titre+'</td><td class="n"></td><td class="n"></td><td class="n">'+h(tot)+'</td><td class="n">'+m(tot*c.hv)+'</td></tr>';
   };
-  t+=bloc("Total de captação",c.cap,c.hCap);
+  t+=bloc("Total de captação",c.capt,c.hCap);
   t+=bloc("Total de pós",c.pos,c.hPos);
   t+='<tr class="total"><td>Valor de tabela da entrega</td><td class="n"></td><td class="n"></td><td class="n">'+h(c.horas)+'</td><td class="n">'+m(c.entrega)+'</td></tr></tbody>';
   document.getElementById("b-decomp").innerHTML=t;
 
   /* ---- alertas ---- */
   var A=[];
-  if(c.tetoLiq<=0)
+  if(c.podeEntregar<=0)
     A.push(["er","Teto","O que sai do seu bolso já consome tudo o que você recebe. Nesse desenho não sobra nada para entregar: peça um cachê ou recuse."]);
-  else if(c.entrega>c.tetoLiq)
-    A.push(["er","Teto","<strong>Você passa "+m(c.entrega-c.tetoLiq)+" do teto</strong> ("+nf(100*c.entrega/c.tetoLiq-100,0)+" % acima). Entrega "+m(c.entrega)+" de valor de tabela para um teto de "+m(c.tetoLiq)+". Tire entregáveis, não estique a estadia."]);
+  else if(over)
+    A.push(["er","Teto","<strong>Você passa "+m(c.entrega-c.podeEntregar)+" do teto</strong> ("+nf(100*c.entrega/c.podeEntregar-100,0)+" % acima). Tire entregáveis, não estique a estadia."]);
   else
-    A.push(["ok","Teto","Entrega de "+m(c.entrega)+" para um teto de "+m(c.tetoLiq)+". Sobram "+m(c.folga)+", ou "+h(c.folga/c.hv)+" de trabalho."]);
+    A.push(["ok","Teto","Entrega de "+m(c.entrega)+" para um teto de "+m(c.podeEntregar)+". Sobram "+m(c.folga)+", ou "+h(c.folga/c.hv)+" de trabalho."]);
 
   if(!c.diariasLuz)A.push(["av","Luz","Nenhum conceito informado. É o número de conceitos que define a duração, não o contrário."]);
   else if(c.diariasLuz>e.diarias)
@@ -1139,11 +1279,11 @@ function renderPermuta(){
     A.push(["ok","Luz",nf(c.janelas,1)+" janelas de luz, ou seja "+nf(c.diariasLuz,0)+" diárias no mínimo, dentro das "+nf(e.diarias,0)+" combinadas. Escreva os horários de cada janela antes da viagem."]);
 
   if(e.video>0){
-    var hf=e.video*mod("video")/60, ok=c.horasDoadas>0&&hf/c.horasDoadas<=.4;
-    A.push([ok?"ok":"er","Filme","O filme principal sozinho leva <strong>"+h(hf)+"</strong> de montagem"+
+    var hf=e.video*mod("video")/60, okf=c.horasDoadas>0&&hf/c.horasDoadas<=.4;
+    A.push([okf?"ok":"er","Filme","O filme principal sozinho leva <strong>"+h(hf)+"</strong> de montagem"+
       (c.horasDoadas>0?", "+nf(100*hf/c.horasDoadas,0)+" % do que você pode doar":"")+". "+
-      (ok?"Cabe. É a peça de portfólio, uma por permuta e nunca mais."
-         :"Nesse tamanho de permuta ele não cabe: o filme horizontal serve ao seu portfólio, não ao lugar. Guarde-o para as permutas longas.")]);
+      (okf?"Cabe. É a peça de portfólio, uma por permuta e nunca mais."
+          :"Nesse tamanho de permuta ele não cabe: o filme horizontal serve ao seu portfólio, não ao lugar. Guarde-o para as permutas longas.")]);
   }
   if(e.video>0&&e.reels>0)
     A.push(["av","Formato","Filme horizontal e reels vertical no mesmo trabalho: decida a orientação <strong>por conceito</strong> antes de viajar, nunca no local. Paisagem, arquitetura e planos abertos em 16:9; corredor, escada, cascata, silhueta e detalhe em 9:16. Filmar duas vezes só nos momentos-chave, e nunca em conceito encenado."]);
@@ -1155,8 +1295,12 @@ function renderPermuta(){
   else
     A.push(["ok","Retorno","Teto em "+nf(c.pct*100,0)+" % porque as quatro contrapartidas estão escritas. Se saírem do combinado, o teto volta para "+nf(P.teto.sem*100,0)+" % e a entrega cai junto."]);
 
-  if(e.enc>0&&!e.modeloHosp)
-    A.push(["av","Modelo","Há "+nf(e.enc,0)+" conceito"+(e.enc>1?"s":"")+" encenado"+(e.enc>1?"s":"")+" e a hospedagem da modelo não está incluída. Ela entra no combinado desde a primeira mensagem, nunca como pedido posterior."]);
+  if(e.enc>0&&!e.modelo)
+    A.push(["av","Modelo","Há "+nf(e.enc,0)+" conceito"+(e.enc>1?"s":"")+" encenado"+(e.enc>1?"s":"")+" e nenhuma modelo na viagem. Ou você tira os conceitos encenados, ou coloca a presença dela no combinado desde a primeira mensagem."]);
+  else if(e.modelo==1)
+    A.push(["ok","Modelo","Mesmo quarto: o valor recebido não muda, mas a presença em cena é o que a maioria desses lugares não tem. Ela se apresenta como parte do valor da proposta, nunca como um detalhe de logística."]);
+  else if(e.modelo==2)
+    A.push(["av","Modelo","Quarto separado dobra o valor recebido e dobra o teto. Confirme por escrito que são dois quartos antes de dimensionar a entrega por este número."]);
   if(e.enc>0)
     A.push(["ok","Imagem","Imagens com pessoas identificáveis: o uso se delimita por escrito no mesmo documento, com prazo de utilização. Autorização em opt-in, com as restrições em caixas marcadas."]);
 
@@ -1173,8 +1317,8 @@ function renderPermuta(){
   var L=[];
   L.push("COMBINADO DE PERMUTA");
   L.push("");
-  L.push("Hospedagem recebida: "+nf(e.diarias,0)+" diária"+(e.diarias>1?"s":"")+" para "+c.pessoas+" pessoa"+(c.pessoas>1?"s":"")+
-    (e.refeicoes?", refeições incluídas":"")+". Valor de tabela: "+m(c.V)+".");
+  L.push("Hospedagem recebida: "+nf(e.diarias,0)+" diária"+(e.diarias>1?"s":"")+" em "+(c.quartos>1?"dois quartos":"um quarto")+
+    (e.modelo?" para duas pessoas":"")+(e.refeicoes?", refeições incluídas":"")+". Valor de tabela: "+m(c.V)+".");
   L.push("Valor de tabela da entrega: "+m(c.entrega)+".");
   L.push("");
   L.push("O que será captado");
@@ -1217,30 +1361,29 @@ function copiarCombinado(){
     navigator.clipboard.writeText(t).then(function(){flash("b-saved","Combinado copiado");},function(){flash("b-saved","Não deu para copiar, selecione o texto","er");});
   else flash("b-saved","Selecione o texto e faça Ctrl+C");
 }
-function aplicarFormato(i){
-  var F=S.permuta.formatos[i]; if(!F)return;
-  var e=S.permuta.entrada, K=["doc","enc","lote","edit","disp","tomadas","clip","reels","video"];
-  for(var k=0;k<K.length;k++)e[K[k]]=F[K[k]]||0;
-  renderPermuta(); persist(); flash("b-saved","Formato "+F.n+" aplicado");
-}
 function bindPermuta(){
   var e=S.permuta.entrada;
   var map={"b-diaria":"diaria","b-diarias":"diarias","b-refeicoes":"refeicoes","b-custos":"custos",
            "b-cachet":"cachet","b-doc":"doc","b-enc":"enc","b-lote":"lote","b-edit":"edit",
            "b-disp":"disp","b-tomadas":"tomadas","b-clip":"clip","b-reels":"reels","b-video":"video"};
   for(var id in map)if(Object.prototype.hasOwnProperty.call(map,id))set(id,e[map[id]]);
-  set("b-modelohosp",e.modeloHosp?"1":"0");
+  set("b-modelo",String(e.modelo||0));
   set("b-contra",e.contra?"1":"0");
 }
 function readPermuta(){
   if(!document.getElementById("b-diaria"))return;
-  var e=S.permuta.entrada;
+  var e=S.permuta.entrada, avant=e.diarias;
   e.diaria=num("b-diaria"); e.diarias=num("b-diarias"); e.refeicoes=num("b-refeicoes");
   e.custos=num("b-custos"); e.cachet=num("b-cachet");
   e.doc=num("b-doc"); e.enc=num("b-enc"); e.lote=num("b-lote"); e.edit=num("b-edit");
   e.disp=num("b-disp"); e.tomadas=num("b-tomadas"); e.clip=num("b-clip");
   e.reels=num("b-reels"); e.video=num("b-video");
-  e.modeloHosp=num("b-modelohosp")?1:0; e.contra=num("b-contra")?1:0;
+  e.modelo=num("b-modelo"); e.contra=num("b-contra")?1:0;
+  /* Le format suit les diarias : il bascule seul quand on sort de sa fourchette. */
+  if(e.diarias!==avant){
+    var novo=formatoDeDiarias(e.diarias);
+    if(novo!==e.formato){setFormato(novo); flash("b-saved","Formato "+S.permuta.formatos[novo].n);}
+  }
 }
 function readParPermuta(){
   if(!document.getElementById("pp-tcom"))return;
@@ -1265,7 +1408,7 @@ function renderParPermuta(){
   set("pp-prazo",P.prazo.padrao); set("pp-prazof",P.prazo.comFilme);
   set("pp-pvf",P.prazo.previaFotos); set("pp-pvp",P.prazo.previaPrazo);
 
-  var C=[["rec","Valor recebido de referência","só um lembrete, não entra no cálculo",null],
+  var C=[["dmin","A partir de quantas diárias","",1],["dmax","Até quantas diárias","0 = sem limite",1],
          ["doc","Conceitos documentais","",1],["enc","Conceitos encenados","",1],
          ["lote","Fotos em lote","",5],["edit","Fotos editadas","",1],["disp","Fotos disparadas","",50],
          ["tomadas","Tomadas tratadas","",1],["clip","Clipes ≤20s","",1],
@@ -1277,8 +1420,7 @@ function renderParPermuta(){
       '</div><div class="ngrid">';
     for(var j=0;j<C.length;j++){var f=C[j];
       t+='<label>'+esc(f[1])+'<i>'+esc(f[2])+'</i>'+
-        (f[3]===null?'<input type="text" value="'+esc(F[f[0]]||"")+'" oninput="setF('+i+',\''+f[0]+'\',this.value)">'
-                    :'<input type="number" step="'+f[3]+'" min="0" value="'+(F[f[0]]||0)+'" oninput="setF('+i+',\''+f[0]+'\',+this.value)">')+
+        '<input type="number" step="'+f[3]+'" min="0" value="'+(F[f[0]]||0)+'" oninput="setF('+i+',\''+f[0]+'\',+this.value)">'+
         '</label>';}
     t+='</div></div>';}
   document.getElementById("pp-formatos").innerHTML=t;
@@ -1689,7 +1831,7 @@ document.addEventListener("input",function(ev){
 document.addEventListener("change",function(ev){
   var t=ev.target; if(!t||!t.id)return;
   if(t.id==="i-niche"||t.id==="i-prazo"||t.id==="i-seg"||t.id==="i-modelo"||t.id==="p-auto"||t.id==="q-per"||
-     t.id==="b-modelohosp"||t.id==="b-contra")refresh();
+     t.id==="b-modelo"||t.id==="b-contra")refresh();
   if(t.id==="d-mois"){S.ui.mois=t.value; persist(); renderDash();}
 });
 var tR=null;
