@@ -306,6 +306,7 @@ svg .hit{fill:transparent}
     </div>
     <div class="tabs">
       <button class="tab" id="t-calc-main" aria-current="true" onclick="tab('calc','main')">Calculadora</button>
+      <button class="tab" id="t-calc-permuta" aria-current="false" onclick="tab('calc','permuta')">Permuta</button>
       <button class="tab" id="t-calc-set" aria-current="false" onclick="tab('calc','set')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3.1"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.6 1.6 0 0 0 9 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.6 1.6 0 0 0 4.6 9a1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3H9a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8V9a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1z"/></svg>
         Parâmetros
@@ -403,6 +404,92 @@ svg .hit{fill:transparent}
     </div>
   </div>
 
+
+  <!-- ---- onglet permuta ---- -->
+  <div id="pane-calc-permuta" hidden>
+    <div class="calc-grid" style="display:grid; grid-template-columns:minmax(0,1fr) 396px; gap:20px; align-items:start">
+
+      <div class="stack">
+        <div class="card pad">
+          <div class="cardhead"><h2>O que você recebe</h2><span>a hospedagem, a preço de tabela dela</span></div>
+          <div class="grid2">
+            <div class="field"><label for="b-diaria">Diária de tabela R$<span class="sub">o preço anunciado, não o custo real deles</span></label><input type="number" id="b-diaria" step="50" min="0"></div>
+            <div class="field"><label for="b-diarias">Número de diárias</label><input type="number" id="b-diarias" step="1" min="0"></div>
+            <div class="field"><label for="b-modelohosp">Hospedagem da modelo incluída<span class="sub">entra no combinado desde a primeira mensagem</span></label><select id="b-modelohosp"><option value="0">Não</option><option value="1">Sim</option></select></div>
+            <div class="field"><label for="b-refeicoes">Refeições incluídas R$<span class="sub">a preço de cardápio, no total da estadia</span></label><input type="number" id="b-refeicoes" step="50" min="0"></div>
+            <div class="field wide"><label for="b-contra">Contrapartidas escritas no combinado<span class="sub">marcação, menção, duas indicações, depoimento. Sem elas o teto cai</span></label><select id="b-contra"><option value="1">Sim, escritas</option><option value="0">Não</option></select></div>
+          </div>
+        </div>
+
+        <div class="card pad">
+          <div class="cardhead"><h2>A captação</h2><span>um conceito = um lugar, um momento de luz, uma ação</span></div>
+          <div class="grid2">
+            <div class="field"><label for="b-doc">Conceitos documentais<span class="sub">espaço, detalhe, arquitetura, sem direção</span></label><input type="number" id="b-doc" step="1" min="0"></div>
+            <div class="field"><label for="b-enc">Conceitos encenados<span class="sub">presença, direção, repetição do gesto, espera da luz</span></label><input type="number" id="b-enc" step="1" min="0"></div>
+          </div>
+        </div>
+
+        <div class="card pad">
+          <div class="cardhead"><h2>A entrega</h2><span>é aqui que a permuta custa, não na viagem</span></div>
+          <div class="grid2">
+            <div class="field"><label for="b-lote">Fotos com tratamento de lote<span class="sub">preset aplicado, sem retoque individual</span></label><input type="number" id="b-lote" step="5" min="0"></div>
+            <div class="field"><label for="b-edit">Fotos editadas uma a uma</label><input type="number" id="b-edit" step="1" min="0"></div>
+            <div class="field"><label for="b-disp">Fotos disparadas<span class="sub">total de cliques, é isso que custa a seleção</span></label><input type="number" id="b-disp" step="50" min="0"></div>
+            <div class="field"><label for="b-tomadas">Tomadas tratadas<span class="sub">5 a 10s, cor aplicada, sem montagem. Moeda de troca barata</span></label><input type="number" id="b-tomadas" step="1" min="0"></div>
+            <div class="field"><label for="b-clip">Clipes tratados ≤20s</label><input type="number" id="b-clip" step="1" min="0"></div>
+            <div class="field"><label for="b-reels">Reels montados<span class="sub">vertical 9:16, 15 a 30s</span></label><input type="number" id="b-reels" step="1" min="0"></div>
+            <div class="field wide"><label for="b-video">Filme principal<span class="sub">horizontal 16:9, 45 a 90s. Só existe em permuta longa</span></label><input type="number" id="b-video" step="1" min="0"></div>
+          </div>
+        </div>
+
+        <div class="card pad">
+          <div class="cardhead"><h2>O que sai do seu bolso</h2><span>dinheiro de verdade, descontado do teto</span></div>
+          <div class="grid2">
+            <div class="field"><label for="b-custos">Custos diretos R$<span class="sub">só o que não aconteceria sem o trabalho</span></label><input type="number" id="b-custos" step="25" min="0"></div>
+            <div class="field"><label for="b-cachet">Cachê da modelo R$<span class="sub">0 se ela também está em permuta</span></label><input type="number" id="b-cachet" step="25" min="0"></div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="stack sticky" style="position:sticky; top:88px">
+        <div class="hero">
+          <span class="eyebrow">Teto de entrega</span>
+          <span class="big num" id="b-teto">—</span>
+          <span class="cap" id="b-teto-s"></span>
+          <div class="rates">
+            <div class="rate"><span>Valor da entrega</span><b class="num" id="b-entrega">—</b><small id="b-entrega-s"></small></div>
+            <div class="rate"><span>Horas doadas</span><b class="num" id="b-horas">—</b><small id="b-horas-s"></small></div>
+            <div class="rate"><span>Diárias pela luz</span><b class="num" id="b-luz">—</b><small id="b-luz-s"></small></div>
+          </div>
+        </div>
+        <div class="stack-s" id="b-alerts"></div>
+        <div class="card pad">
+          <div class="cardhead"><h2>Formatos</h2><span>preencher com um clique</span></div>
+          <div class="row" id="b-formatos"></div>
+        </div>
+      </aside>
+    </div>
+
+    <div class="stack" style="margin-top:20px">
+      <div class="card pad">
+        <div class="cardhead"><h2>De onde vem o teto</h2><span>o que se recebe, e o que dá para devolver</span></div>
+        <div class="tw"><table id="b-origem"></table></div>
+      </div>
+
+      <div class="card pad">
+        <div class="cardhead"><h2>O que a entrega custa</h2><span>cada linha, em horas e em reais de tabela</span></div>
+        <div class="tw"><table id="b-decomp"></table></div>
+      </div>
+
+      <div class="card pad">
+        <div class="cardhead"><h2>O combinado</h2><span>para colar na mensagem, antes da viagem</span>
+          <button class="btn ghost sm right" onclick="copiarCombinado()">Copiar</button></div>
+        <p class="formula" id="b-combinado"></p>
+        <span class="saved" id="b-saved"></span>
+      </div>
+    </div>
+  </div>
+
   <!-- ---- onglet paramètres de la calculadora ---- -->
   <div id="pane-calc-set" hidden>
     <div class="stack">
@@ -445,6 +532,33 @@ svg .hit{fill:transparent}
         <div class="cardhead"><h2>Modelo em cena</h2><span>cachê repassado a preço de custo, sem margem</span></div>
         <div id="p-modelo"></div>
         <p class="note" style="margin-top:12px">Estes valores não são a sua remuneração. Entram nos custos diretos, como o segundo fotógrafo, e reaparecem iguais no preço anunciado. As horas de uma faixa contam a preparação, as trocas de roupa e a espera, não só o tempo diante da câmera. A faixa uso ampliado cobre site, Booking, anúncios pagos e impressos por doze meses, e se negocia antes da captação.</p>
+      </div>
+
+
+      <div class="card pad">
+        <div class="cardhead"><h2>Permuta</h2><span>o teto, o custo de um conceito, e o ritmo da luz</span></div>
+        <div class="grid3">
+          <div class="field"><label for="pp-tcom">Teto com contrapartidas<span class="sub">0,70 = 70 % do valor de tabela recebido</span></label><input type="number" id="pp-tcom" step="0.05" min="0" max="1"></div>
+          <div class="field"><label for="pp-tsem">Teto sem contrapartidas<span class="sub">0,50 = o equilíbrio real entre custos reais</span></label><input type="number" id="pp-tsem" step="0.05" min="0" max="1"></div>
+          <div class="field"><label for="pp-fixas">Horas fixas por permuta<span class="sub">importação, backup, seleção final, galeria, entrega</span></label><input type="number" id="pp-fixas" step="0.5" min="0"></div>
+          <div class="field"><label for="pp-doc">Minutos por conceito documental</label><input type="number" id="pp-doc" step="5" min="0"></div>
+          <div class="field"><label for="pp-enc">Minutos por conceito encenado<span class="sub">direção, repetição, espera da luz</span></label><input type="number" id="pp-enc" step="5" min="0"></div>
+          <div class="field"><label for="pp-mt">Minutos para selecionar uma foto</label><input type="number" id="pp-mt" step="0.05" min="0"></div>
+          <div class="field"><label for="pp-mf">Minutos por foto editada uma a uma</label><input type="number" id="pp-mf" step="0.5" min="0"></div>
+          <div class="field"><label for="pp-lote">Minutos por foto em lote<span class="sub">preset e conferência rápida</span></label><input type="number" id="pp-lote" step="0.5" min="0"></div>
+          <div class="field"><label for="pp-tomada">Minutos por tomada tratada</label><input type="number" id="pp-tomada" step="1" min="0"></div>
+          <div class="field"><label for="pp-docj">Conceitos documentais por janela<span class="sub">uma janela de luz dura cerca de 2h</span></label><input type="number" id="pp-docj" step="0.5" min="0.5"></div>
+          <div class="field"><label for="pp-encj">Conceitos encenados por janela</label><input type="number" id="pp-encj" step="0.5" min="0.5"></div>
+          <div class="field"><label for="pp-jd">Janelas por diária<span class="sub">manhã cedo e golden hour. O resto do dia a luz não entrega</span></label><input type="number" id="pp-jd" step="1" min="1"></div>
+          <div class="field"><label for="pp-margem">Diárias de margem<span class="sub">chegada, saída, chuva</span></label><input type="number" id="pp-margem" step="1" min="0"></div>
+          <div class="field"><label for="pp-prazo">Prazo padrão</label><input type="text" id="pp-prazo"></div>
+          <div class="field"><label for="pp-prazof">Prazo com filme principal</label><input type="text" id="pp-prazof"></div>
+          <div class="field"><label for="pp-pvf">Prévia, número de fotos</label><input type="number" id="pp-pvf" step="1" min="0"></div>
+          <div class="field"><label for="pp-pvp">Prazo da prévia</label><input type="text" id="pp-pvp"></div>
+        </div>
+        <p class="note" style="margin-top:12px">Uma diária vaga custa à hospedagem entre 15 e 30 % da tabela dela, uma hora sua custa metade do que você cobra por ela. Aos 70 % você ainda paga mais caro que o lugar: essa diferença é o preço das contrapartidas. Sem elas escritas, o teto volta para 50 %.</p>
+        <div class="cardhead" style="margin-top:22px"><h2 style="font-size:15px">Os três formatos</h2><span>o que cada botão preenche na aba Permuta</span></div>
+        <div id="pp-formatos"></div>
       </div>
 
       <div class="card pad">
@@ -598,6 +712,19 @@ var DEFAULTS={
     {n:"Modelo em cena, diária até 6h",         preco:800, min:0, rep:1},
     {n:"Modelo, acréscimo uso ampliado 12 meses", preco:800, min:0, rep:1}
   ],
+  permuta:{
+    teto:{com:.70,sem:.50},
+    cap:{fixas:2,doc:45,enc:90,docJanela:2.5,encJanela:1,janelasDia:2,margem:1},
+    pos:{mt:.15,mf:3,lote:1.5,tomada:6},
+    prazo:{padrao:"30 dias úteis",comFilme:"45 dias úteis",previaFotos:5,previaPrazo:"7 dias úteis"},
+    formatos:[
+      {n:"Curta", rec:"R$ 1.000 a 2.000", doc:3, enc:0, lote:20, edit:6,  disp:200, tomadas:0,  clip:4, reels:0, video:0},
+      {n:"Padrão",rec:"R$ 2.500 a 4.000", doc:4, enc:1, lote:30, edit:10, disp:350, tomadas:12, clip:0, reels:1, video:0},
+      {n:"Longa", rec:"acima de R$ 6.000",doc:7, enc:3, lote:40, edit:15, disp:700, tomadas:12, clip:0, reels:2, video:1}
+    ],
+    entrada:{diaria:700,diarias:4,modeloHosp:1,refeicoes:0,contra:1,custos:0,cachet:0,
+             doc:4,enc:1,lote:30,edit:10,disp:350,tomadas:12,clip:0,reels:1,video:0}
+  },
   missions:[
     {d:"2026-08-27",cli:"Ãmba, inauguração",niche:"Evento corporativo",valor:900, horas:9.54,st:"pago"},
     {d:"2026-08-31",cli:"Imobiliária, Arpoador",niche:"Imóveis",       valor:1000,horas:6.55,st:"fechado"}
@@ -652,6 +779,18 @@ function migre(st){
     for(var b=0;b<LM.length;b++)if(MODN[LM[b].k]&&/ — |par personne|sur place|au montage/.test(LM[b].n||""))LM[b].n=MODN[LM[b].k];
     s.rev=4; st.__migre=1;
   }
+  /* Arrivee de l'onglet permuta : on installe le bloc s'il manque, sans toucher au reste. */
+  if(!(s.rev>=5)){
+    if(!st.permuta||typeof st.permuta!=="object")st.permuta=clone(DEFAULTS.permuta);
+    var PD=DEFAULTS.permuta, PB=st.permuta;
+    if(!PB.teto)PB.teto=clone(PD.teto);
+    if(!PB.cap)PB.cap=clone(PD.cap);
+    if(!PB.pos)PB.pos=clone(PD.pos);
+    if(!PB.prazo)PB.prazo=clone(PD.prazo);
+    if(!Array.isArray(PB.formatos)||!PB.formatos.length)PB.formatos=clone(PD.formatos);
+    if(!PB.entrada)PB.entrada=clone(PD.entrada);
+    s.rev=5; st.__migre=1;
+  }
   return st;
 }
 function clone(o){return JSON.parse(JSON.stringify(o));}
@@ -689,6 +828,7 @@ function set(id,v){var e=document.getElementById(id); if(e&&document.activeEleme
 /* ================= navigation ================= */
 var PAGES=["calc","dash"];
 var TABS={calc:"main",dash:"main"};
+var TABLIST={calc:["main","permuta","set"],dash:["main","set"]};
 function go(p){
   for(var i=0;i<PAGES.length;i++){
     document.getElementById("page-"+PAGES[i]).hidden=(PAGES[i]!==p);
@@ -696,12 +836,14 @@ function go(p){
   }
   S.ui.page=p; persist();
   if(p==="dash")TABS.dash==="set"?renderParDash():renderDash();
-  else TABS.calc==="set"?renderPar():renderCalc();
+  else if(TABS.calc==="set")renderPar();
+  else if(TABS.calc==="permuta")renderPermuta();
+  else renderCalc();
   window.scrollTo(0,0);
 }
 function tab(page,which){
   TABS[page]=which;
-  var list=["main","set"];
+  var list=TABLIST[page];
   for(var i=0;i<list.length;i++){
     document.getElementById("pane-"+page+"-"+list[i]).hidden=(list[i]!==which);
     document.getElementById("t-"+page+"-"+list[i]).setAttribute("aria-current",String(list[i]===which));
@@ -709,6 +851,7 @@ function tab(page,which){
   if(page==="dash"&&which==="main")renderDash();
   else if(page==="dash"&&which==="set")renderParDash();
   else if(page==="calc"&&which==="main")renderCalc();
+  else if(page==="calc"&&which==="permuta")renderPermuta();
   else if(page==="calc"&&which==="set")renderPar();
   window.scrollTo(0,0);
 }
@@ -896,6 +1039,252 @@ function renderCalc(){
   document.getElementById("r-alerts").innerHTML=als(A);
 }
 function als(A){var o=""; for(var i=0;i<A.length;i++)o+='<div class="al '+A[i][0]+'"><span class="k">'+A[i][1]+'</span><span>'+A[i][2]+'</span></div>'; return o;}
+
+/* ================= permuta ================= */
+function permutaCalc(){
+  var P=S.permuta, e=P.entrada, hv=horaVenda(), i;
+  var pessoas=1+(e.modeloHosp?1:0);
+  var hosp=(e.diaria||0)*(e.diarias||0)*pessoas;
+  var V=hosp+(e.refeicoes||0);
+  var pct=e.contra?P.teto.com:P.teto.sem;
+  var teto=V*pct;
+  var caixa=(e.custos||0)+(e.cachet||0);
+  var tetoLiq=teto-caixa;
+  var horasDoadas=hv?tetoLiq/hv:0;
+
+  var cap=[
+    {n:"Horas fixas",s:"importação, backup, seleção final, galeria, entrega",q:1,u:nf(P.cap.fixas,1)+" h",hrs:P.cap.fixas},
+    {n:"Conceitos documentais",s:"espaço, detalhe, arquitetura, sem direção",q:e.doc,u:P.cap.doc+" min",hrs:e.doc*P.cap.doc/60},
+    {n:"Conceitos encenados",s:"presença, direção, repetição, espera da luz",q:e.enc,u:P.cap.enc+" min",hrs:e.enc*P.cap.enc/60}
+  ];
+  var pos=[
+    {n:"Seleção das fotos",q:e.disp,u:nf(P.pos.mt,2)+" min/foto",hrs:e.disp*P.pos.mt/60},
+    {n:"Fotos com tratamento de lote",q:e.lote,u:nf(P.pos.lote,1)+" min/foto",hrs:e.lote*P.pos.lote/60},
+    {n:"Fotos editadas uma a uma",q:e.edit,u:nf(P.pos.mf,1)+" min/foto",hrs:e.edit*P.pos.mf/60},
+    {n:"Tomadas tratadas",s:"cor aplicada em lote, sem montagem",q:e.tomadas,u:P.pos.tomada+" min",hrs:e.tomadas*P.pos.tomada/60},
+    {n:"Clipes tratados ≤20s",q:e.clip,u:mod("clipe")+" min",hrs:e.clip*mod("clipe")/60},
+    {n:"Reels montados",s:"vertical 9:16",q:e.reels,u:mod("reels")+" min",hrs:e.reels*mod("reels")/60},
+    {n:"Filme principal",s:"horizontal 16:9",q:e.video,u:mod("video")+" min",hrs:e.video*mod("video")/60}
+  ];
+  var hCap=0,hPos=0;
+  for(i=0;i<cap.length;i++)hCap+=cap[i].hrs;
+  for(i=0;i<pos.length;i++)hPos+=pos[i].hrs;
+  var horas=hCap+hPos, entrega=horas*hv;
+  var janelas=(P.cap.docJanela?(e.doc||0)/P.cap.docJanela:0)+(P.cap.encJanela?(e.enc||0)/P.cap.encJanela:0);
+  var diariasLuz=janelas?Math.ceil(janelas/(P.cap.janelasDia||1))+(P.cap.margem||0):0;
+  var prazo=e.video>0?P.prazo.comFilme:P.prazo.padrao;
+  return {P:P,e:e,hv:hv,pessoas:pessoas,hosp:hosp,V:V,pct:pct,teto:teto,caixa:caixa,tetoLiq:tetoLiq,
+    horasDoadas:horasDoadas,cap:cap,pos:pos,hCap:hCap,hPos:hPos,horas:horas,entrega:entrega,
+    janelas:janelas,diariasLuz:diariasLuz,prazo:prazo,folga:tetoLiq-entrega,ratio:hCap?hPos/hCap:0};
+}
+
+function renderPermuta(){
+  if(!document.getElementById("b-teto"))return;
+  bindPermuta();
+  var c=permutaCalc(), e=c.e, P=c.P;
+
+  document.getElementById("b-teto").textContent=m(c.tetoLiq);
+  document.getElementById("b-teto-s").textContent=
+    nf(c.pct*100,0)+" % de "+m(c.V)+" recebidos"+(c.caixa?", menos "+m(c.caixa)+" que sai do seu bolso":"");
+  document.getElementById("b-entrega").textContent=m(c.entrega);
+  document.getElementById("b-entrega-s").textContent=c.folga>=0
+    ? "sobra "+m(c.folga)+" de margem" : "passa "+m(-c.folga)+" do teto";
+  document.getElementById("b-horas").textContent=h(c.horas);
+  document.getElementById("b-horas-s").textContent=h(c.hCap)+" de captação, "+h(c.hPos)+" de pós";
+  document.getElementById("b-luz").textContent=c.diariasLuz?nf(c.diariasLuz,0):"—";
+  document.getElementById("b-luz-s").textContent=nf(c.janelas,1)+" janelas de luz necessárias";
+
+  var fb="";
+  for(var f=0;f<P.formatos.length;f++)
+    fb+='<button class="btn ghost sm" onclick="aplicarFormato('+f+')" title="'+esc(P.formatos[f].rec)+'">'+esc(P.formatos[f].n)+'</button>';
+  document.getElementById("b-formatos").innerHTML=fb;
+
+  var o='<thead><tr><th>Item</th><th class="n">Qtd</th><th class="n">Unidade</th><th class="n">R$</th></tr></thead><tbody>';
+  o+='<tr><td>Diárias recebidas<span class="sub">'+(c.pessoas>1?"duas pessoas hospedadas":"uma pessoa hospedada")+'</span></td><td class="n">'+nf(e.diarias)+'</td><td class="n">'+m(e.diaria)+' × '+c.pessoas+'</td><td class="n">'+m(c.hosp)+'</td></tr>';
+  o+='<tr'+(e.refeicoes?'':' class="z"')+'><td>Refeições incluídas<span class="sub">a preço de cardápio</span></td><td class="n">—</td><td class="n">—</td><td class="n">'+m(e.refeicoes)+'</td></tr>';
+  o+='<tr class="sum"><td>Valor de tabela recebido</td><td class="n"></td><td class="n"></td><td class="n">'+m(c.V)+'</td></tr>';
+  o+='<tr><td>Teto de entrega<span class="sub">'+(e.contra?"contrapartidas escritas no combinado":"sem contrapartidas escritas")+'</span></td><td class="n"></td><td class="n">'+nf(c.pct*100,0)+' %</td><td class="n">'+m(c.teto)+'</td></tr>';
+  o+='<tr'+(c.caixa?'':' class="z"')+'><td>Dinheiro que sai do seu bolso<span class="sub">custos diretos e cachê da modelo</span></td><td class="n"></td><td class="n">—</td><td class="n">− '+m(c.caixa)+'</td></tr>';
+  o+='<tr class="total"><td>Teto líquido<span class="sub">é este número que a entrega não pode passar</span></td><td class="n"></td><td class="n">'+h(c.horasDoadas)+'</td><td class="n">'+m(c.tetoLiq)+'</td></tr></tbody>';
+  document.getElementById("b-origem").innerHTML=o;
+
+  var t='<thead><tr><th>Item</th><th class="n">Qtd</th><th class="n">Unidade</th><th class="n">Horas</th><th class="n">R$</th></tr></thead><tbody>';
+  var bloc=function(titre,arr,tot){
+    var r='<tr class="sum"><td>'+titre+'</td><td class="n"></td><td class="n"></td><td class="n">'+h(tot)+'</td><td class="n">'+m(tot*c.hv)+'</td></tr>';
+    var q="";
+    for(var i=0;i<arr.length;i++){var L=arr[i];
+      q+='<tr'+(L.hrs?'':' class="z"')+'><td>'+esc(L.n)+(L.s?'<span class="sub">'+esc(L.s)+'</span>':'')+
+        '</td><td class="n">'+nf(L.q,L.q%1?1:0)+'</td><td class="n">'+esc(L.u)+
+        '</td><td class="n">'+h(L.hrs)+'</td><td class="n">'+m(L.hrs*c.hv)+'</td></tr>';}
+    return q+r;
+  };
+  t+=bloc("Total de captação",c.cap,c.hCap);
+  t+=bloc("Total de pós",c.pos,c.hPos);
+  t+='<tr class="total"><td>Valor de tabela da entrega</td><td class="n"></td><td class="n"></td><td class="n">'+h(c.horas)+'</td><td class="n">'+m(c.entrega)+'</td></tr></tbody>';
+  document.getElementById("b-decomp").innerHTML=t;
+
+  /* ---- alertas ---- */
+  var A=[];
+  if(c.tetoLiq<=0)
+    A.push(["er","Teto","O que sai do seu bolso já consome tudo o que você recebe. Nesse desenho não sobra nada para entregar: peça um cachê ou recuse."]);
+  else if(c.entrega>c.tetoLiq)
+    A.push(["er","Teto","<strong>Você passa "+m(c.entrega-c.tetoLiq)+" do teto</strong> ("+nf(100*c.entrega/c.tetoLiq-100,0)+" % acima). Entrega "+m(c.entrega)+" de valor de tabela para um teto de "+m(c.tetoLiq)+". Tire entregáveis, não estique a estadia."]);
+  else
+    A.push(["ok","Teto","Entrega de "+m(c.entrega)+" para um teto de "+m(c.tetoLiq)+". Sobram "+m(c.folga)+", ou "+h(c.folga/c.hv)+" de trabalho."]);
+
+  if(!c.diariasLuz)A.push(["av","Luz","Nenhum conceito informado. É o número de conceitos que define a duração, não o contrário."]);
+  else if(c.diariasLuz>e.diarias)
+    A.push(["er","Luz","<strong>"+nf(c.diariasLuz,0)+" diárias no mínimo</strong> para caber "+nf(c.janelas,1)+" janelas de luz, e o combinado prevê "+nf(e.diarias,0)+". Ou você reduz os conceitos, ou pede mais diárias."]);
+  else
+    A.push(["ok","Luz",nf(c.janelas,1)+" janelas de luz, ou seja "+nf(c.diariasLuz,0)+" diárias no mínimo, dentro das "+nf(e.diarias,0)+" combinadas. Escreva os horários de cada janela antes da viagem."]);
+
+  if(e.video>0){
+    var hf=e.video*mod("video")/60, ok=c.horasDoadas>0&&hf/c.horasDoadas<=.4;
+    A.push([ok?"ok":"er","Filme","O filme principal sozinho leva <strong>"+h(hf)+"</strong> de montagem"+
+      (c.horasDoadas>0?", "+nf(100*hf/c.horasDoadas,0)+" % do que você pode doar":"")+". "+
+      (ok?"Cabe. É a peça de portfólio, uma por permuta e nunca mais."
+         :"Nesse tamanho de permuta ele não cabe: o filme horizontal serve ao seu portfólio, não ao lugar. Guarde-o para as permutas longas.")]);
+  }
+  if(e.video>0&&e.reels>0)
+    A.push(["av","Formato","Filme horizontal e reels vertical no mesmo trabalho: decida a orientação <strong>por conceito</strong> antes de viajar, nunca no local. Paisagem, arquitetura e planos abertos em 16:9; corredor, escada, cascata, silhueta e detalhe em 9:16. Filmar duas vezes só nos momentos-chave, e nunca em conceito encenado."]);
+  else if(e.reels>0&&!e.video)
+    A.push(["ok","Formato","Sem filme principal, tudo é vertical. Uma orientação só, uma passagem só, nenhuma arbitragem no local."]);
+
+  if(!e.contra)
+    A.push(["er","Retorno","<strong>Teto em "+nf(c.pct*100,0)+" %.</strong> Para subir para "+nf(P.teto.com*100,0)+" % precisam estar escritas: marcação em todas as publicações que usarem o material, menção em story fixado ou na bio, duas indicações nominais, um depoimento curto por escrito. Nada disso vem sozinho."]);
+  else
+    A.push(["ok","Retorno","Teto em "+nf(c.pct*100,0)+" % porque as quatro contrapartidas estão escritas. Se saírem do combinado, o teto volta para "+nf(P.teto.sem*100,0)+" % e a entrega cai junto."]);
+
+  if(e.enc>0&&!e.modeloHosp)
+    A.push(["av","Modelo","Há "+nf(e.enc,0)+" conceito"+(e.enc>1?"s":"")+" encenado"+(e.enc>1?"s":"")+" e a hospedagem da modelo não está incluída. Ela entra no combinado desde a primeira mensagem, nunca como pedido posterior."]);
+  if(e.enc>0)
+    A.push(["ok","Imagem","Imagens com pessoas identificáveis: o uso se delimita por escrito no mesmo documento, com prazo de utilização. Autorização em opt-in, com as restrições em caixas marcadas."]);
+
+  if(e.tomadas>0)
+    A.push(["ok","Tomadas",nf(e.tomadas,0)+" tomadas custam "+h(e.tomadas*P.pos.tomada/60)+" e valem muito para o lugar. Três condições por escrito: seleção feita por você, proibição de revenda, crédito obrigatório. Arquivos brutos continuam fora da permuta, sem exceção."]);
+
+  if(c.hCap&&c.ratio>4)
+    A.push(["av","Ritmo","A pós pesa "+nf(c.ratio,1)+" vezes a captação. Acima de 4 o trabalho continua muito depois da viagem, quando a hospedagem já foi usufruída. Troque uma peça montada por fotos ou por tomadas tratadas."]);
+
+  A.push(["ok","Prazo","<strong>"+esc(c.prazo)+"</strong> após a saída, com prévia de "+nf(P.prazo.previaFotos,0)+" fotos em "+esc(P.prazo.previaPrazo)+". Diga em uma frase que os trabalhos pagos passam na frente. Encurtar o prazo é opção paga, e uma permuta com opção paga vira permuta parcial."]);
+  document.getElementById("b-alerts").innerHTML=als(A);
+
+  /* ---- combinado ---- */
+  var L=[];
+  L.push("COMBINADO DE PERMUTA");
+  L.push("");
+  L.push("Hospedagem recebida: "+nf(e.diarias,0)+" diária"+(e.diarias>1?"s":"")+" para "+c.pessoas+" pessoa"+(c.pessoas>1?"s":"")+
+    (e.refeicoes?", refeições incluídas":"")+". Valor de tabela: "+m(c.V)+".");
+  L.push("Valor de tabela da entrega: "+m(c.entrega)+".");
+  L.push("");
+  L.push("O que será captado");
+  if(e.doc)L.push("  "+nf(e.doc,0)+(e.doc>1?" conceitos documentais":" conceito documental")+" (espaço, detalhe, arquitetura)");
+  if(e.enc)L.push("  "+nf(e.enc,0)+(e.enc>1?" conceitos encenados":" conceito encenado")+" com presença em cena");
+  L.push("  Um conceito é um lugar, um momento de luz e uma ação. Fora desta lista, nada é captado.");
+  L.push("");
+  L.push("O que será entregue");
+  if(e.lote)L.push("  "+nf(e.lote,0)+" fotos com tratamento de lote");
+  if(e.edit)L.push("  "+nf(e.edit,0)+" fotos editadas uma a uma");
+  if(e.tomadas)L.push("  "+nf(e.tomadas,0)+" tomadas tratadas de 5 a 10s, sem montagem, sem revenda, com crédito");
+  if(e.clip)L.push("  "+nf(e.clip,0)+" clipe"+(e.clip>1?"s":"")+" tratado"+(e.clip>1?"s":"")+" de até 20s");
+  if(e.reels)L.push("  "+nf(e.reels,0)+" reels vertical 9:16 de 15 a 30s");
+  if(e.video)L.push("  1 filme principal horizontal 16:9 de 45 a 90s");
+  L.push("  Arquivos brutos não entram na permuta, em nenhuma hipótese.");
+  L.push("");
+  L.push("Janelas de captação");
+  L.push("  "+nf(Math.ceil(c.janelas),0)+" janelas de cerca de 2h, com horário definido antes da viagem.");
+  L.push("  Fora dessas janelas não há captação. O restante da estadia é livre.");
+  L.push("");
+  L.push("Prazo");
+  L.push("  Prévia de "+nf(P.prazo.previaFotos,0)+" fotos em "+P.prazo.previaPrazo+".");
+  L.push("  Entrega completa em "+c.prazo+" após a saída.");
+  L.push("");
+  L.push("Contrapartidas");
+  L.push("  Marcação do perfil em todas as publicações que usarem o material.");
+  L.push("  Menção em story fixado ou na bio por um período definido.");
+  L.push("  Duas indicações nominais para outros lugares.");
+  L.push("  Um depoimento curto por escrito, utilizável no site.");
+  if(e.enc)L.push("  Uso das imagens com pessoas identificáveis delimitado por escrito, com prazo.");
+  L.push("");
+  L.push("Encerramento");
+  L.push("  Depois da data de entrega, qualquer pedido novo é orçado.");
+  document.getElementById("b-combinado").textContent=L.join("\n");
+}
+
+function copiarCombinado(){
+  var t=document.getElementById("b-combinado").textContent;
+  if(navigator.clipboard&&navigator.clipboard.writeText)
+    navigator.clipboard.writeText(t).then(function(){flash("b-saved","Combinado copiado");},function(){flash("b-saved","Não deu para copiar, selecione o texto","er");});
+  else flash("b-saved","Selecione o texto e faça Ctrl+C");
+}
+function aplicarFormato(i){
+  var F=S.permuta.formatos[i]; if(!F)return;
+  var e=S.permuta.entrada, K=["doc","enc","lote","edit","disp","tomadas","clip","reels","video"];
+  for(var k=0;k<K.length;k++)e[K[k]]=F[K[k]]||0;
+  renderPermuta(); persist(); flash("b-saved","Formato "+F.n+" aplicado");
+}
+function bindPermuta(){
+  var e=S.permuta.entrada;
+  var map={"b-diaria":"diaria","b-diarias":"diarias","b-refeicoes":"refeicoes","b-custos":"custos",
+           "b-cachet":"cachet","b-doc":"doc","b-enc":"enc","b-lote":"lote","b-edit":"edit",
+           "b-disp":"disp","b-tomadas":"tomadas","b-clip":"clip","b-reels":"reels","b-video":"video"};
+  for(var id in map)if(Object.prototype.hasOwnProperty.call(map,id))set(id,e[map[id]]);
+  set("b-modelohosp",e.modeloHosp?"1":"0");
+  set("b-contra",e.contra?"1":"0");
+}
+function readPermuta(){
+  if(!document.getElementById("b-diaria"))return;
+  var e=S.permuta.entrada;
+  e.diaria=num("b-diaria"); e.diarias=num("b-diarias"); e.refeicoes=num("b-refeicoes");
+  e.custos=num("b-custos"); e.cachet=num("b-cachet");
+  e.doc=num("b-doc"); e.enc=num("b-enc"); e.lote=num("b-lote"); e.edit=num("b-edit");
+  e.disp=num("b-disp"); e.tomadas=num("b-tomadas"); e.clip=num("b-clip");
+  e.reels=num("b-reels"); e.video=num("b-video");
+  e.modeloHosp=num("b-modelohosp")?1:0; e.contra=num("b-contra")?1:0;
+}
+function readParPermuta(){
+  if(!document.getElementById("pp-tcom"))return;
+  var P=S.permuta;
+  P.teto.com=num("pp-tcom"); P.teto.sem=num("pp-tsem");
+  P.cap.fixas=num("pp-fixas"); P.cap.doc=num("pp-doc"); P.cap.enc=num("pp-enc");
+  P.cap.docJanela=num("pp-docj")||1; P.cap.encJanela=num("pp-encj")||1;
+  P.cap.janelasDia=num("pp-jd")||1; P.cap.margem=num("pp-margem");
+  P.pos.mt=num("pp-mt"); P.pos.mf=num("pp-mf"); P.pos.lote=num("pp-lote"); P.pos.tomada=num("pp-tomada");
+  var g=function(id){var el=document.getElementById(id); return el?el.value:"";};
+  P.prazo.padrao=g("pp-prazo"); P.prazo.comFilme=g("pp-prazof");
+  P.prazo.previaFotos=num("pp-pvf"); P.prazo.previaPrazo=g("pp-pvp");
+}
+function renderParPermuta(){
+  if(!document.getElementById("pp-tcom"))return;
+  var P=S.permuta;
+  set("pp-tcom",P.teto.com); set("pp-tsem",P.teto.sem);
+  set("pp-fixas",P.cap.fixas); set("pp-doc",P.cap.doc); set("pp-enc",P.cap.enc);
+  set("pp-mt",P.pos.mt); set("pp-mf",P.pos.mf); set("pp-lote",P.pos.lote); set("pp-tomada",P.pos.tomada);
+  set("pp-docj",P.cap.docJanela); set("pp-encj",P.cap.encJanela);
+  set("pp-jd",P.cap.janelasDia); set("pp-margem",P.cap.margem);
+  set("pp-prazo",P.prazo.padrao); set("pp-prazof",P.prazo.comFilme);
+  set("pp-pvf",P.prazo.previaFotos); set("pp-pvp",P.prazo.previaPrazo);
+
+  var C=[["rec","Valor recebido de referência","só um lembrete, não entra no cálculo",null],
+         ["doc","Conceitos documentais","",1],["enc","Conceitos encenados","",1],
+         ["lote","Fotos em lote","",5],["edit","Fotos editadas","",1],["disp","Fotos disparadas","",50],
+         ["tomadas","Tomadas tratadas","",1],["clip","Clipes ≤20s","",1],
+         ["reels","Reels","",1],["video","Filme principal","",1]];
+  var t="";
+  for(var i=0;i<P.formatos.length;i++){var F=P.formatos[i];
+    t+='<div class="nicheblk"><div class="nichehd">'+
+      '<input type="text" value="'+esc(F.n)+'" oninput="setF('+i+',\'n\',this.value)" aria-label="Nome do formato">'+
+      '</div><div class="ngrid">';
+    for(var j=0;j<C.length;j++){var f=C[j];
+      t+='<label>'+esc(f[1])+'<i>'+esc(f[2])+'</i>'+
+        (f[3]===null?'<input type="text" value="'+esc(F[f[0]]||"")+'" oninput="setF('+i+',\''+f[0]+'\',this.value)">'
+                    :'<input type="number" step="'+f[3]+'" min="0" value="'+(F[f[0]]||0)+'" oninput="setF('+i+',\''+f[0]+'\',+this.value)">')+
+        '</label>';}
+    t+='</div></div>';}
+  document.getElementById("pp-formatos").innerHTML=t;
+}
+function setF(i,k,v){S.permuta.formatos[i][k]=v; persist(); if(TABS.calc==="permuta")renderPermuta();}
+
 
 /* ================= tableau de bord ================= */
 var MOISFMT=new Intl.DateTimeFormat("pt-BR",{month:"short",year:"2-digit"});
@@ -1169,6 +1558,7 @@ function renderPar(){
       '<td class="n"><input type="number" min="0" max="1" step="1" value="'+E.rep+'" oninput="setE('+y+',\'rep\',+this.value)"></td>'+
       '<td class="n"><button class="btn ghost sm" onclick="delE('+y+')">Remover</button></td></tr>';}
   document.getElementById("p-extras").innerHTML=ex+"</tbody>";
+  renderParPermuta();
   syncJSON();
 }
 function renderParDash(){
@@ -1275,28 +1665,31 @@ function readSocle(){
   S.dash.periode=num("q-per")||12;
 }
 function refresh(){
-  readForm(); readSocle(); renderCalc();
+  readForm(); readSocle(); readPermuta(); readParPermuta(); renderCalc();
   document.getElementById("p-taxa").disabled=!!S.socle.auto;
   if(S.socle.auto)set("p-taxa",Math.round(taxa()*100)/100);
   bindForm();            /* noms de niches et champs de saisie, protege par le focus */
   majParCalcules();      /* colonnes calculees du panneau parametres */
+  if(TABS.calc==="permuta")renderPermuta();
   majFormule(); renderParDash(); syncJSON(); persist();
   if(!document.getElementById("page-dash").hidden&&TABS.dash==="main")renderDash();
 }
 var tP=null;
 function persist(){clearTimeout(tP); tP=setTimeout(function(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}},450);}
 function renderAll(){
-  bindForm(); renderCalc(); renderPar(); renderParDash();
+  bindForm(); renderCalc(); renderPar(); renderParDash(); renderPermuta();
   if(!document.getElementById("page-dash").hidden)renderDash();
 }
 
 document.addEventListener("input",function(ev){
   var t=ev.target; if(!t||!t.id)return;
-  if((t.id.indexOf("i-")===0||t.id.indexOf("p-")===0||t.id.indexOf("q-")===0)&&t.id!=="p-json")refresh();
+  if((t.id.indexOf("i-")===0||t.id.indexOf("p-")===0||t.id.indexOf("q-")===0||
+      t.id.indexOf("b-")===0||t.id.indexOf("pp-")===0)&&t.id!=="p-json")refresh();
 });
 document.addEventListener("change",function(ev){
   var t=ev.target; if(!t||!t.id)return;
-  if(t.id==="i-niche"||t.id==="i-prazo"||t.id==="i-seg"||t.id==="i-modelo"||t.id==="p-auto"||t.id==="q-per")refresh();
+  if(t.id==="i-niche"||t.id==="i-prazo"||t.id==="i-seg"||t.id==="i-modelo"||t.id==="p-auto"||t.id==="q-per"||
+     t.id==="b-modelohosp"||t.id==="b-contra")refresh();
   if(t.id==="d-mois"){S.ui.mois=t.value; persist(); renderDash();}
 });
 var tR=null;
